@@ -19,12 +19,35 @@
   <link rel="stylesheet" href="/assets/css/components.css">
 
   <style>
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+
     html, body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
       overflow-x: hidden !important;
       width: 100% !important;
       max-width: 100vw !important;
+      margin: 0 !important;
+      padding: 0 !important;
       -webkit-overflow-scrolling: touch !important;
+    }
+
+    .hv-app-shell {
+      display: flex !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      min-width: 0 !important;
+      overflow-x: hidden !important;
+    }
+
+    .hv-main-content {
+      flex: 1 1 100% !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      min-width: 0 !important;
+      overflow-x: hidden !important;
+      padding: 1.5rem 1.25rem 5rem !important;
     }
 
     .dashboard-metrics-grid {
@@ -33,7 +56,66 @@
       gap: 1.25rem;
       margin-bottom: 2rem;
       width: 100%;
-      box-sizing: border-box;
+      max-width: 100%;
+    }
+
+    .metric-tile {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      overflow: hidden !important;
+      padding: 1.25rem !important;
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .metric-tile-header {
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: space-between !important;
+      flex-wrap: wrap !important;
+      gap: 0.35rem !important;
+      width: 100% !important;
+    }
+
+    .metric-tile-label {
+      font-size: 0.75rem !important;
+      font-weight: 700 !important;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: normal !important;
+      word-break: break-word !important;
+      line-height: 1.25 !important;
+      flex: 1 1 auto !important;
+    }
+
+    .metric-tile-header .badge {
+      font-size: 0.65rem !important;
+      padding: 0.2rem 0.45rem !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+    }
+
+    .metric-tile-value {
+      font-size: 2rem !important;
+      font-weight: 800 !important;
+      color: var(--color-primary);
+      line-height: 1.1 !important;
+      margin: 0.2rem 0 !important;
+    }
+
+    .metric-tile-sub {
+      font-size: 0.72rem !important;
+      color: var(--color-text-muted);
+      line-height: 1.3 !important;
+      white-space: normal !important;
+      word-break: break-word !important;
     }
 
     .dashboard-content-grid {
@@ -43,14 +125,13 @@
       margin-bottom: 2rem;
       width: 100%;
       max-width: 100%;
-      box-sizing: border-box;
     }
 
     .dashboard-content-grid > div,
     .card {
       min-width: 0 !important;
       max-width: 100% !important;
-      box-sizing: border-box !important;
+      width: 100% !important;
       overflow: hidden !important;
     }
 
@@ -61,7 +142,6 @@
       flex-wrap: wrap !important;
       gap: 0.5rem !important;
       width: 100% !important;
-      box-sizing: border-box !important;
     }
 
     .data-table-wrapper {
@@ -72,59 +152,150 @@
       -webkit-overflow-scrolling: touch !important;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
-      box-sizing: border-box !important;
     }
 
     @media (max-width: 992px) {
       .dashboard-metrics-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.75rem !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.65rem !important;
         margin-bottom: 1.25rem !important;
       }
-      .dashboard-content-grid {
-        grid-template-columns: minmax(0, 1fr) !important;
-        gap: 1.25rem !important;
-      }
-      .hv-main-content {
-        padding: 0.75rem 0.65rem 5rem !important;
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
-        box-sizing: border-box !important;
-      }
-      .card {
-        padding: 1rem 0.75rem !important;
-        border-radius: var(--radius-md) !important;
-        box-shadow: 0 4px 16px rgba(41, 35, 45, 0.05) !important;
-      }
-      .card-header {
-        margin-bottom: 0.85rem !important;
-        padding-bottom: 0.65rem !important;
-      }
-      .card-title {
-        font-size: 1.1rem !important;
-      }
-      .data-table {
-        min-width: 440px !important;
-      }
-      .data-table th, .data-table td {
-        padding: 0.55rem 0.5rem !important;
-        font-size: 0.76rem !important;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .dashboard-metrics-grid {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 0.5rem !important;
-      }
       .metric-tile {
-        padding: 0.85rem 0.75rem !important;
+        padding: 0.75rem 0.65rem !important;
       }
       .metric-tile-value {
         font-size: 1.45rem !important;
       }
-      .metric-tile-sub {
+      .metric-tile-label {
         font-size: 0.68rem !important;
+      }
+      .metric-tile-sub {
+        font-size: 0.65rem !important;
+      }
+      .dashboard-content-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.25rem !important;
+        width: 100% !important;
+      }
+      .hv-main-content {
+        padding: 0.75rem 0.6rem 5rem !important;
+      }
+      .card {
+        padding: 0.85rem 0.65rem !important;
+      }
+      .card-title {
+        font-size: 1.05rem !important;
+      }
+
+      /* Proportional Tables for Mobile Devices */
+      .architecture-table,
+      .audit-table,
+      .data-table {
+        width: 100% !important;
+        min-width: 100% !important;
+        table-layout: fixed !important;
+      }
+      .architecture-table th, .architecture-table td {
+        padding: 0.4rem 0.2rem !important;
+        font-size: 0.68rem !important;
+        line-height: 1.25 !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+      }
+      .architecture-table th:nth-child(1), .architecture-table td:nth-child(1) {
+        width: 30% !important;
+        padding-left: 0.3rem !important;
+      }
+      .architecture-table th:nth-child(2), .architecture-table td:nth-child(2) {
+        width: 17% !important;
+        text-align: center !important;
+      }
+      .architecture-table th:nth-child(3), .architecture-table td:nth-child(3) {
+        width: 25% !important;
+      }
+      .architecture-table th:nth-child(4), .architecture-table td:nth-child(4) {
+        width: 28% !important;
+        padding-right: 0.3rem !important;
+        text-align: right !important;
+      }
+      .architecture-table .badge {
+        font-size: 0.58rem !important;
+        padding: 0.12rem 0.25rem !important;
+        white-space: nowrap !important;
+        letter-spacing: 0 !important;
+        display: inline-block !important;
+      }
+
+      .audit-table th, .audit-table td {
+        padding: 0.45rem 0.25rem !important;
+        font-size: 0.7rem !important;
+        line-height: 1.25 !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+      }
+      .audit-table th:nth-child(1), .audit-table td:nth-child(1) {
+        width: 34% !important;
+      }
+      .audit-table th:nth-child(2), .audit-table td:nth-child(2) {
+        width: 44% !important;
+      }
+      .audit-table th:nth-child(3), .audit-table td:nth-child(3) {
+        width: 22% !important;
+        text-align: right !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .metric-tile-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.25rem !important;
+      }
+      .card-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.4rem !important;
+      }
+      .card-header .btn {
+        font-size: 0.72rem !important;
+        padding: 0.3rem 0.6rem !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hv-main-content {
+        padding: 0.5rem 0.4rem 5rem !important;
+      }
+      .dashboard-metrics-grid {
+        gap: 0.4rem !important;
+      }
+      .metric-tile {
+        padding: 0.55rem 0.4rem !important;
+      }
+      .metric-tile-value {
+        font-size: 1.25rem !important;
+      }
+      .metric-tile-label {
+        font-size: 0.62rem !important;
+      }
+      .metric-tile-header .badge {
+        font-size: 0.58rem !important;
+        padding: 0.12rem 0.35rem !important;
+      }
+      .metric-tile-sub {
+        font-size: 0.6rem !important;
+      }
+      .card {
+        padding: 0.65rem 0.45rem !important;
+      }
+      .architecture-table th, .architecture-table td {
+        font-size: 0.62rem !important;
+        padding: 0.35rem 0.15rem !important;
+      }
+      .audit-table th, .audit-table td {
+        font-size: 0.65rem !important;
+        padding: 0.35rem 0.2rem !important;
       }
     }
   </style>
@@ -261,13 +432,8 @@
             <a href="models.html" class="btn btn-secondary btn-sm">Full Laboratory &rarr;</a>
           </div>
 
-          <div style="font-size:0.72rem; color:var(--color-primary); font-weight:600; margin-bottom:0.4rem; display:flex; align-items:center; gap:0.35rem;" class="mobile-only-inline">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 8L22 12L18 16"/><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
-            <span>Swipe horizontally to view full matrix</span>
-          </div>
-
           <div class="data-table-wrapper">
-            <table class="data-table">
+            <table class="data-table architecture-table">
               <thead>
                 <tr>
                   <th>Architecture</th>
@@ -280,44 +446,44 @@
                 <tr>
                   <td><strong>DenseNet-121</strong></td>
                   <td>7.0M</td>
-                  <td>US Classification</td>
+                  <td>US Class.</td>
                   <td><span class="badge badge-verified">Active <span class="desktop-only">Baseline</span></span></td>
                 </tr>
                 <tr>
                   <td><strong>Multi-Scale CNN</strong></td>
                   <td>Custom</td>
-                  <td>NAFLD Ultrasound</td>
+                  <td>NAFLD US</td>
                   <td><span class="badge badge-literature">Literature <span class="desktop-only">(PMID: 34097226)</span></span></td>
                 </tr>
                 <tr>
                   <td><strong>VGG19</strong></td>
                   <td>143.7M</td>
-                  <td>Multi-class US</td>
+                  <td>Multi US</td>
                   <td><span class="badge badge-literature">Literature <span class="desktop-only">(Villanueva)</span></span></td>
                 </tr>
                 <tr>
                   <td><strong>VGG16</strong></td>
                   <td>138.4M</td>
-                  <td>Ultrasound Stack</td>
+                  <td>US Stack</td>
                   <td><span class="badge badge-experimental">Implemented</span></td>
                 </tr>
                 <tr>
                   <td><strong>ResNet50V2</strong></td>
                   <td>25.6M</td>
-                  <td>Parenchymal ResNet</td>
+                  <td>ResNet</td>
                   <td><span class="badge badge-experimental">Implemented</span></td>
                 </tr>
                 <tr>
                   <td><strong>DenseNet-201</strong></td>
                   <td>20.0M</td>
-                  <td>Dense Ultrasound</td>
+                  <td>Dense US</td>
                   <td><span class="badge badge-not-trained">Not Trained</span></td>
                 </tr>
                 <tr>
-                  <td><strong>Inception-ResNet-v2</strong></td>
+                  <td><strong><span class="desktop-only">Inception-ResNet-v2</span><span class="mobile-only-inline">Incept-ResNet</span></strong></td>
                   <td>55.8M</td>
-                  <td>Multi-modal Stack</td>
-                  <td><span class="badge badge-not-implemented">Not Implemented</span></td>
+                  <td>Multimodal</td>
+                  <td><span class="badge badge-not-implemented">Not Impl.</span></td>
                 </tr>
               </tbody>
             </table>
@@ -332,7 +498,7 @@
           </div>
 
           <div class="data-table-wrapper" style="margin-bottom:1rem;">
-            <table class="data-table">
+            <table class="data-table audit-table">
               <thead>
                 <tr>
                   <th>Patient ID</th>
