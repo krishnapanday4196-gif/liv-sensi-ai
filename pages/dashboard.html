@@ -14,9 +14,9 @@
   <link rel="icon" type="image/png" href="/assets/images/livsensi_icon_192.png">
   <title>Research Dashboard – Liv-Sensi</title>
   
-  <link rel="stylesheet" href="/assets/css/design-system.css">
-  <link rel="stylesheet" href="/assets/css/animations.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/design-system.css?v=2.6">
+  <link rel="stylesheet" href="/assets/css/animations.css?v=2.6">
+  <link rel="stylesheet" href="/assets/css/components.css?v=2.6">
 
   <style>
     *, *::before, *::after {
@@ -162,6 +162,12 @@
       }
       .metric-tile {
         padding: 0.75rem 0.65rem !important;
+      }
+      .metric-tile-header {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.25rem !important;
       }
       .metric-tile-value {
         font-size: 1.45rem !important;
@@ -447,19 +453,19 @@
                   <td><strong>DenseNet-121</strong></td>
                   <td>7.0M</td>
                   <td>US Class.</td>
-                  <td><span class="badge badge-verified">Active <span class="desktop-only">Baseline</span></span></td>
+                  <td><span class="badge badge-verified">Active</span></td>
                 </tr>
                 <tr>
                   <td><strong>Multi-Scale CNN</strong></td>
                   <td>Custom</td>
                   <td>NAFLD US</td>
-                  <td><span class="badge badge-literature">Literature <span class="desktop-only">(PMID: 34097226)</span></span></td>
+                  <td><span class="badge badge-literature">Literature</span></td>
                 </tr>
                 <tr>
                   <td><strong>VGG19</strong></td>
                   <td>143.7M</td>
                   <td>Multi US</td>
-                  <td><span class="badge badge-literature">Literature <span class="desktop-only">(Villanueva)</span></span></td>
+                  <td><span class="badge badge-literature">Literature</span></td>
                 </tr>
                 <tr>
                   <td><strong>VGG16</strong></td>
