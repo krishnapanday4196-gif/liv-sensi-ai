@@ -333,6 +333,17 @@
             Diffusely elevated parenchymal acoustic echogenicity with deep acoustic beam attenuation. Portal venule delineation blunted, characteristic of Grade II Hepatic Steatosis.
           </p>
 
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.65rem; margin-top:0.85rem; margin-bottom:0.5rem;">
+            <div style="background:#000; border-radius:6px; overflow:hidden; text-align:center; padding:0.35rem;">
+              <img id="modal-scan-img" src="/sample_scans/sample_fatty_liver.png" alt="Scan" style="width:100%; height:115px; object-fit:contain; display:block; margin:0 auto;">
+              <div style="color:#eee; font-size:0.65rem; margin-top:3px; font-weight:600;">Original Ultrasound Scan</div>
+            </div>
+            <div style="background:#000; border-radius:6px; overflow:hidden; text-align:center; padding:0.35rem;">
+              <img id="modal-cam-img" src="/sample_scans/sample_fatty_cam.png" alt="Grad-CAM" style="width:100%; height:115px; object-fit:contain; display:block; margin:0 auto;">
+              <div style="color:#eee; font-size:0.65rem; margin-top:3px; font-weight:600;">Grad-CAM Heatmap Overlay</div>
+            </div>
+          </div>
+
           <div style="border-top:1px solid #E8DEEB; margin-top:1rem; padding-top:0.75rem; display:flex; justify-content:space-between; font-size:0.75rem;">
             <span>Reviewed by: Dr. Arvind Sharma, MD (Radiology)</span>
             <span style="color:#2E7D32; font-weight:700;">&check; Electronically Signed</span>
@@ -349,7 +360,7 @@
   </div>
 
   <script src="/assets/js/navigation.js"></script>
-  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.js?v=2.7"></script>
   <!-- Mobile Native App Bottom Navigation Bar -->
   <nav class="mobile-bottom-nav">
     <a href="/index.html" class="mobile-nav-tab">

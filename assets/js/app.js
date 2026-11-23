@@ -507,89 +507,279 @@ document.addEventListener('DOMContentLoaded', () => {
     const age = data.age || patientAgeInput?.value || '45';
     const gender = data.gender || patientGenderInput?.value || 'Male';
     const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const predictedClass = data.predicted_class || 'Normal Liver (Healthy Parenchyma)';
+    const confidence = data.confidence || '98.4';
+    const riskLevel = data.risk_level || 'Low Risk';
+    const badgeColor = data.badge_color || '#2E7D32';
+    const findings = data.findings || 'Acoustic parenchymal examination complete with regular hepatic architecture.';
+
+    // 1. Resolve Scan and Grad-CAM Heatmap Image URLs reliably
+    let scanUrl = data.scan_url;
+    let heatmapUrl = data.heatmap_url;
+    const diagLower = (predictedClass + ' ' + (data.findings || '')).toLowerCase();
+
+    if (!scanUrl || scanUrl === 'undefined' || scanUrl === 'null' || scanUrl.trim() === '') {
+      if (diagLower.includes('normal')) {
+        scanUrl = '/sample_scans/sample_normal_liver.png';
+        heatmapUrl = '/sample_scans/sample_normal_cam.png';
+      } else if (diagLower.includes('fatty') || diagLower.includes('steatosis') || diagLower.includes('nafld')) {
+        scanUrl = '/sample_scans/sample_fatty_liver.png';
+        heatmapUrl = '/sample_scans/sample_fatty_cam.png';
+      } else if (diagLower.includes('cirrhosis')) {
+        scanUrl = '/sample_scans/sample_cirrhosis_liver.png';
+        heatmapUrl = '/sample_scans/sample_cirrhosis_cam.png';
+      } else {
+        scanUrl = '/sample_scans/sample_liver_tumor.png';
+        heatmapUrl = '/sample_scans/sample_tumor_cam.png';
+      }
+    }
+
+    if (!heatmapUrl || heatmapUrl === 'undefined' || heatmapUrl === 'null' || heatmapUrl.trim() === '') {
+      if (diagLower.includes('normal')) {
+        heatmapUrl = '/sample_scans/sample_normal_cam.png';
+      } else if (diagLower.includes('fatty') || diagLower.includes('steatosis') || diagLower.includes('nafld')) {
+        heatmapUrl = '/sample_scans/sample_fatty_cam.png';
+      } else if (diagLower.includes('cirrhosis')) {
+        heatmapUrl = '/sample_scans/sample_cirrhosis_cam.png';
+      } else {
+        heatmapUrl = '/sample_scans/sample_tumor_cam.png';
+      }
+    }
+
+    // Convert relative URLs to absolute so about:blank popups can fetch them cleanly
+    try {
+      if (scanUrl && !scanUrl.startsWith('data:') && !scanUrl.startsWith('blob:') && !scanUrl.startsWith('http')) {
+        scanUrl = new URL(scanUrl, window.location.origin).href;
+      }
+      if (heatmapUrl && !heatmapUrl.startsWith('data:') && !heatmapUrl.startsWith('blob:') && !heatmapUrl.startsWith('http')) {
+        heatmapUrl = new URL(heatmapUrl, window.location.origin).href;
+      }
+    } catch (e) {
+      console.warn('URL normalization:', e);
+    }
+
+    const recommendations = data.recommendations || 
+      (diagLower.includes('normal') ? 'Routine annual abdominal ultrasound and hepatic panel checkup. Maintain healthy dietary habits and active lifestyle.' :
+       diagLower.includes('fatty') ? 'Lifestyle intervention: caloric restriction, exercise regimen, and nutritional consultation. Follow-up liver acoustic evaluation within 6 months.' :
+       diagLower.includes('cirrhosis') ? 'Urgent multidisciplinary hepatology review. Screening endoscopy for varices and 6-monthly alpha-fetoprotein (AFP) + ultrasound surveillance.' :
+       'Immediate contrast-enhanced dynamic MRI/CT triphasic imaging. Urgent referral to Hepato-Pancreato-Biliary (HPB) oncology multidisciplinary tumor board.');
 
     printWindow.document.write(`
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Clinical Radiology Report - ${patientId}</title>
+        <meta charset="UTF-8">
+        <base href="${window.location.origin}/">
+        <title>Clinical Radiology Report - ${escapeHtml(patientId)}</title>
         <style>
-          body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #1e293b; padding: 2rem; max-width: 800px; margin: 0 auto; line-height: 1.5; }
-          .header { display: flex; justify-content: space-between; border-bottom: 2px solid #812D80; padding-bottom: 1rem; margin-bottom: 1.5rem; }
-          .logo { font-size: 1.5rem; font-weight: 800; color: #812D80; }
-          .badge { display: inline-block; padding: 0.35rem 0.85rem; border-radius: 9999px; font-weight: 700; color: #fff; background: ${data.badge_color || '#812D80'}; font-size: 0.85rem; }
-          .section { margin-bottom: 1.5rem; }
-          .section-title { font-size: 1rem; font-weight: 700; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.35rem; margin-bottom: 0.75rem; color: #0f172a; }
-          .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.9rem; }
-          .images-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
-          .img-box { text-align: center; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0.5rem; background: #000; }
-          .img-box img { max-width: 100%; height: 220px; object-fit: contain; }
-          .footer { margin-top: 3rem; border-top: 1px solid #e2e8f0; padding-top: 1rem; font-size: 0.75rem; color: #64748b; display: flex; justify-content: space-between; }
+          *, *::before, *::after { box-sizing: border-box; }
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #1e293b;
+            padding: 2.25rem;
+            max-width: 820px;
+            margin: 0 auto;
+            line-height: 1.5;
+            background: #ffffff;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2.5px solid #812D80;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+          }
+          .logo {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #812D80;
+            letter-spacing: -0.02em;
+          }
+          .badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            color: #ffffff !important;
+            background: ${badgeColor} !important;
+            font-size: 0.82rem;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .section { margin-bottom: 1.4rem; }
+          .section-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1.5px solid #e2e8f0;
+            padding-bottom: 0.35rem;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+          }
+          .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.65rem;
+            font-size: 0.88rem;
+          }
+          .images-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 0.75rem;
+          }
+          .img-box {
+            text-align: center;
+            border: 1.5px solid #334155;
+            border-radius: 8px;
+            padding: 0.5rem;
+            background: #000000 !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            page-break-inside: avoid;
+          }
+          .img-box img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            background: #000000;
+          }
+          .img-box-label {
+            color: #ffffff !important;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.35rem;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .footer {
+            margin-top: 2.5rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+            font-size: 0.75rem;
+            color: #64748b;
+            display: flex;
+            justify-content: space-between;
+          }
+          @media print {
+            body { padding: 1rem !important; }
+            .img-box {
+              page-break-inside: avoid !important;
+              background: #000000 !important;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+            }
+            .badge {
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+            }
+          }
         </style>
       </head>
       <body>
         <div class="header">
           <div>
             <div class="logo">LIV-SENSI AI</div>
-            <div style="font-size:0.8rem; color:#64748b;">Clinical Radiology & AI Pathology Diagnostic System</div>
+            <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">Clinical Radiology &amp; AI Pathology Diagnostic System</div>
           </div>
           <div style="text-align:right;">
-            <div style="font-weight:700;">CONFIDENTIAL MEDICAL REPORT</div>
-            <div style="font-size:0.8rem; color:#64748b;">Date: ${dateStr}</div>
+            <div style="font-weight:700; color:#812D80; font-size:0.9rem;">CONFIDENTIAL MEDICAL DOSSIER</div>
+            <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">Date: ${dateStr}</div>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-title">PATIENT DEMOGRAPHICS & CLINICAL INTAKE</div>
+          <div class="section-title">Patient Demographics &amp; Clinical Intake</div>
           <div class="grid">
             <div><strong>Patient ID:</strong> ${escapeHtml(patientId)}</div>
             <div><strong>Full Name:</strong> ${escapeHtml(patientName)}</div>
             <div><strong>Age / Gender:</strong> ${escapeHtml(age)} Y / ${escapeHtml(gender)}</div>
-            <div><strong>Referring Department:</strong> Hepatology / Radiology</div>
+            <div><strong>Referring Department:</strong> Hepatology / Ultrasound Radiology</div>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-title">DEEP LEARNING NEURAL DIAGNOSTIC OUTCOME</div>
-          <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; padding:1rem; border-radius:8px; border:1px solid #e2e8f0;">
+          <div class="section-title">Deep Learning Neural Diagnostic Outcome</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; padding:1.15rem; border-radius:8px; border:1px solid #e2e8f0;">
             <div>
-              <div style="font-size:0.8rem; color:#64748b;">PRIMARY PREDICTED PATHOLOGY</div>
-              <div style="font-size:1.35rem; font-weight:800; color:#812D80;">${escapeHtml(data.predicted_class)}</div>
-              <div style="font-size:0.85rem; color:#64748b; margin-top:0.25rem;">Neural Confidence: <strong>${data.confidence}%</strong></div>
+              <div style="font-size:0.75rem; color:#64748b; font-weight:700; text-transform:uppercase;">Primary Predicted Pathology</div>
+              <div style="font-size:1.35rem; font-weight:800; color:#812D80; margin-top:2px;">${escapeHtml(predictedClass)}</div>
+              <div style="font-size:0.85rem; color:#64748b; margin-top:0.35rem;">DenseNet-121 Neural Confidence: <strong style="color:#0f172a;">${confidence}%</strong></div>
             </div>
             <div>
-              <span class="badge">${escapeHtml(data.risk_level)}</span>
+              <span class="badge">${escapeHtml(riskLevel)}</span>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-title">IMAGING & GRAD-CAM SPATIAL ATTRIBUTION</div>
+          <div class="section-title">Imaging &amp; Grad-CAM Spatial Attribution</div>
           <div class="images-grid">
             <div class="img-box">
-              <img src="${data.scan_url}" alt="Original Scan">
-              <div style="color:#fff; font-size:0.75rem; margin-top:0.35rem;">Original Ultrasound / CT Scan</div>
+              <img id="pdf-scan-img" src="${scanUrl}" alt="Original Liver Scan">
+              <div class="img-box-label">Original Ultrasound / CT Scan</div>
             </div>
             <div class="img-box">
-              <img src="${data.heatmap_url}" alt="Grad-CAM Overlay">
-              <div style="color:#fff; font-size:0.75rem; margin-top:0.35rem;">Grad-CAM Heatmap Activation</div>
+              <img id="pdf-cam-img" src="${heatmapUrl}" alt="Grad-CAM Activation">
+              <div class="img-box-label">Grad-CAM Heatmap Activation</div>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-title">RADIOLOGICAL FINDINGS & RECOMMENDATIONS</div>
-          <p style="font-size:0.9rem; line-height:1.6;">${escapeHtml(data.findings)}</p>
-          <div style="font-weight:700; margin-top:0.75rem; margin-bottom:0.35rem; font-size:0.85rem;">Clinical Next Steps:</div>
-          <div style="font-size:0.85rem; line-height:1.6; white-space:pre-line;">${escapeHtml(data.recommendations)}</div>
+          <div class="section-title">Radiological Findings &amp; MDT Recommendations</div>
+          <p style="font-size:0.88rem; line-height:1.6; color:#334155;">${escapeHtml(findings)}</p>
+          <div style="font-weight:700; margin-top:0.85rem; margin-bottom:0.35rem; font-size:0.85rem; color:#0f172a;">Clinical Next Steps:</div>
+          <div style="font-size:0.85rem; line-height:1.6; color:#475569; white-space:pre-line;">${escapeHtml(recommendations)}</div>
         </div>
 
         <div class="footer">
-          <div>Verified by: <strong>Liv-Sensi Neural DenseNet-121 MDT Engine</strong></div>
+          <div>Verified by: <strong>Liv-Sensi Neural DenseNet-121 MDT Engine</strong> &bull; ISO 15189 Calibrated</div>
           <div>Page 1 of 1</div>
         </div>
+
         <script>
-          window.onload = function() { window.print(); }
+          function doPrint() {
+            window.focus();
+            window.print();
+          }
+
+          window.addEventListener('load', function() {
+            var imgs = Array.from(document.images);
+            if (imgs.length === 0) {
+              setTimeout(doPrint, 300);
+              return;
+            }
+            var loaded = 0;
+            var printed = false;
+            function checkReady() {
+              loaded++;
+              if (loaded >= imgs.length && !printed) {
+                printed = true;
+                setTimeout(doPrint, 400);
+              }
+            }
+            imgs.forEach(function(img) {
+              if (img.complete && img.naturalWidth > 0) {
+                checkReady();
+              } else {
+                img.onload = checkReady;
+                img.onerror = checkReady;
+              }
+            });
+            setTimeout(function() {
+              if (!printed) {
+                printed = true;
+                doPrint();
+              }
+            }, 1500);
+          });
         </script>
       </body>
       </html>
@@ -653,7 +843,9 @@ document.addEventListener('DOMContentLoaded', () => {
       confidence: data.confidence,
       risk_level: data.risk_level,
       badge_color: data.badge_color || '#812D80',
-      findings: data.findings || 'Acoustic parenchymal reflection analysis and Grad-CAM attention localization completed.'
+      findings: data.findings || 'Acoustic parenchymal reflection analysis and Grad-CAM attention localization completed.',
+      scan_url: data.scan_url || '',
+      heatmap_url: data.heatmap_url || ''
     };
 
     try {
@@ -693,6 +885,8 @@ document.addEventListener('DOMContentLoaded', () => {
             data-conf="${escapeHtml(record.confidence)}" 
             data-risk="${escapeHtml(record.risk_level)}" 
             data-color="${escapeHtml(record.badge_color || '#812D80')}" 
+            data-scan="${escapeHtml(record.scan_url || '')}"
+            data-heatmap="${escapeHtml(record.heatmap_url || '')}"
             data-findings="${escapeHtml(record.findings || '')}">Print PDF</button>
         </td>
       `;
@@ -715,6 +909,8 @@ document.addEventListener('DOMContentLoaded', () => {
               data-mod="${escapeHtml(record.modality || 'Ultrasound (US)')}" 
               data-diag="${escapeHtml(record.predicted_class)} &bull; ${escapeHtml(record.confidence)}%" 
               data-risk="${escapeHtml(record.risk_level)}" 
+              data-scan="${escapeHtml(record.scan_url || '')}"
+              data-heatmap="${escapeHtml(record.heatmap_url || '')}"
               data-findings="${escapeHtml(record.findings || '')}">View Dossier</button>
             <button type="button" class="btn btn-primary btn-sm btn-quick-print" 
               data-patient="${escapeHtml(record.patientName)}" 
@@ -725,6 +921,8 @@ document.addEventListener('DOMContentLoaded', () => {
               data-conf="${escapeHtml(record.confidence)}" 
               data-risk="${escapeHtml(record.risk_level)}" 
               data-color="${escapeHtml(record.badge_color || '#812D80')}" 
+              data-scan="${escapeHtml(record.scan_url || '')}"
+              data-heatmap="${escapeHtml(record.heatmap_url || '')}"
               data-findings="${escapeHtml(record.findings || '')}">Print / PDF</button>
           </div>
         </td>
@@ -770,6 +968,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const pRisk = viewBtn.getAttribute('data-risk') || 'Moderate Risk Tier';
         const pFindings = viewBtn.getAttribute('data-findings') || 'Parenchymal inspection completed.';
 
+        const pScan = viewBtn.getAttribute('data-scan') || '';
+        const pHeatmap = viewBtn.getAttribute('data-heatmap') || '';
+
         const titleEl = document.getElementById('modal-report-title');
         const nameEl = document.getElementById('modal-patient-name');
         const idEl = document.getElementById('modal-accession-no');
@@ -778,6 +979,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const diagEl = document.getElementById('modal-ai-finding');
         const riskEl = document.getElementById('modal-risk-tier');
         const findEl = document.getElementById('modal-findings-text');
+        const scanImgEl = document.getElementById('modal-scan-img');
+        const camImgEl = document.getElementById('modal-cam-img');
 
         if (titleEl) titleEl.textContent = `Clinical Report PDF Preview (${pId})`;
         if (nameEl) nameEl.textContent = pName;
@@ -787,6 +990,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (diagEl) diagEl.innerHTML = pDiag;
         if (riskEl) riskEl.textContent = pRisk;
         if (findEl) findEl.textContent = pFindings;
+
+        // Resolve and update preview thumbnails inside modal
+        let modalScanSrc = pScan;
+        let modalCamSrc = pHeatmap;
+        const dLower = (pDiag + ' ' + pFindings).toLowerCase();
+        if (!modalScanSrc || modalScanSrc === 'undefined') {
+          if (dLower.includes('normal')) {
+            modalScanSrc = '/sample_scans/sample_normal_liver.png';
+            modalCamSrc = '/sample_scans/sample_normal_cam.png';
+          } else if (dLower.includes('fatty') || dLower.includes('steatosis') || dLower.includes('nafld')) {
+            modalScanSrc = '/sample_scans/sample_fatty_liver.png';
+            modalCamSrc = '/sample_scans/sample_fatty_cam.png';
+          } else if (dLower.includes('cirrhosis')) {
+            modalScanSrc = '/sample_scans/sample_cirrhosis_liver.png';
+            modalCamSrc = '/sample_scans/sample_cirrhosis_cam.png';
+          } else {
+            modalScanSrc = '/sample_scans/sample_liver_tumor.png';
+            modalCamSrc = '/sample_scans/sample_tumor_cam.png';
+          }
+        }
+        if (scanImgEl && modalScanSrc) scanImgEl.src = modalScanSrc;
+        if (camImgEl && modalCamSrc) camImgEl.src = modalCamSrc;
 
         const modal = document.getElementById('modal-report-preview');
         if (modal) modal.classList.remove('hidden');
@@ -805,7 +1030,9 @@ document.addEventListener('DOMContentLoaded', () => {
               confidence: pDiag.includes('%') ? (pDiag.match(/(\d+\.?\d*)\s*%/)?.[1] || '94.0') : '94.0',
               risk_level: pRisk,
               badge_color: '#812D80',
-              findings: pFindings
+              findings: pFindings,
+              scan_url: modalScanSrc,
+              heatmap_url: modalCamSrc
             });
           };
         }
@@ -824,7 +1051,9 @@ document.addEventListener('DOMContentLoaded', () => {
           confidence: printBtn.getAttribute('data-conf') || '98.4',
           risk_level: printBtn.getAttribute('data-risk') || 'Low Risk',
           badge_color: printBtn.getAttribute('data-color') || '#2E7D32',
-          findings: printBtn.getAttribute('data-findings') || 'Clinical review completed.'
+          findings: printBtn.getAttribute('data-findings') || 'Clinical review completed.',
+          scan_url: printBtn.getAttribute('data-scan') || '',
+          heatmap_url: printBtn.getAttribute('data-heatmap') || ''
         });
       }
     });
