@@ -106,11 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5. PWA Service Worker Registration
+  // 5. Clean Service Worker: unregister legacy interceptors to guarantee 0ms overhead & instant direct CDN loads on mobile
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(err => {
-      console.log('PWA ServiceWorker notice:', err);
-    });
+    navigator.serviceWorker.getRegistrations().then(regs => {
+      regs.forEach(reg => reg.unregister());
+    }).catch(() => {});
   }
 
   // 6. PWA Install Prompt Listener
