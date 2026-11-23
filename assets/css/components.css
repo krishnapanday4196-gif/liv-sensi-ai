@@ -1408,9 +1408,15 @@
   }
 
   /* 4-column metric tiles become a clean 2x2 grid on tablets & mobile */
-  div[style*="grid-template-columns: repeat(4, 1fr)"] {
+  div[style*="grid-template-columns: repeat(4, 1fr)"]:not([style*="gap: 6px"]):not([style*="gap:6px"]) {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0.75rem !important;
+    width: 100% !important;
+  }
+
+  /* Retain 4-column mathematical confusion matrix layout */
+  div[style*="gap: 6px"], div[style*="gap:6px"] {
+    grid-template-columns: repeat(4, 1fr) !important;
     width: 100% !important;
   }
 
@@ -1470,7 +1476,7 @@
   }
 
   /* 4-column metric tiles on small phones */
-  div[style*="grid-template-columns: repeat(4, 1fr)"] {
+  div[style*="grid-template-columns: repeat(4, 1fr)"]:not([style*="gap: 6px"]):not([style*="gap:6px"]) {
     grid-template-columns: 1fr 1fr !important;
     gap: 0.5rem !important;
   }
