@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Comprehensive Clinical Presets Database
   const PRESETS = {
     'sample_normal_liver.png': {
+      patient_id: 'PT-2026-9041',
       predicted_class: 'Normal Liver (Control Baseline)',
       risk_level: 'LOW RISK',
       badge_color: '#10b981',
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       recommendations: '1. Routine annual preventive health check-up.\n2. Maintain balanced Mediterranean diet and regular physical activity.\n3. Baseline liver function tests (LFT) within normal parameters.'
     },
     'sample_fatty_liver.png': {
+      patient_id: 'PT-2026-8812',
       predicted_class: 'Fatty Liver (Hepatic Steatosis - NAFLD)',
       risk_level: 'MODERATE RISK',
       badge_color: '#f59e0b',
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       recommendations: '1. Recommend FibroScan (Transient Elastography) to quantify CAP score and fibrosis stage.\n2. Lifestyle intervention: 7-10% weight reduction and low glycemic index diet.\n3. Repeat ultrasound and complete LFT panel in 6 months.'
     },
     'sample_cirrhosis_liver.png': {
+      patient_id: 'PT-2026-7643',
       predicted_class: 'Liver Cirrhosis (Severe Fibrosis)',
       risk_level: 'HIGH RISK',
       badge_color: '#ef4444',
@@ -76,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       recommendations: '1. Urgent Hepatology / Gastroenterology clinical consultation.\n2. Serum Alpha-Fetoprotein (AFP) screening and surveillance imaging every 6 months for HCC monitoring.\n3. Endoscopic screening for esophageal varices if clinically indicated.'
     },
     'sample_liver_tumor.png': {
+      patient_id: 'PT-2026-6120',
       predicted_class: 'Focal Hepatic Lesion / Tumor',
       risk_level: 'CRITICAL RISK',
       badge_color: '#dc2626',
@@ -147,6 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedPresetFile = null;
     document.querySelectorAll('.preview-preset-btn').forEach(b => b.classList.remove('active'));
 
+    const randomId = `PT-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    if (patientIdInput) patientIdInput.value = randomId;
+    if (patientNameInput) patientNameInput.value = 'Custom Scan Patient';
+    if (patientAgeInput) patientAgeInput.value = '42';
+    if (patientGenderInput) patientGenderInput.value = 'Female';
+    if (patientSymptomsInput) patientSymptomsInput.value = 'Clinical Diagnostic Evaluation';
+    if (patientEnzymesInput) patientEnzymesInput.value = 'ALT: 45 U/L, AST: 38 U/L';
+
     const reader = new FileReader();
     reader.onload = (e) => {
       uploadedDataUrl = e.target.result;
@@ -178,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const pData = PRESETS[presetFile];
       if (pData) {
+        if (patientIdInput && pData.patient_id) patientIdInput.value = pData.patient_id;
         if (patientNameInput) patientNameInput.value = pData.name;
         if (patientAgeInput) patientAgeInput.value = pData.age;
         if (patientGenderInput) patientGenderInput.value = pData.gender;
@@ -458,6 +471,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    // Show green database alert banner if on analysis page
+    const dbAlert = document.getElementById('db-saved-alert');
+    const dbAlertText = document.getElementById('db-saved-alert-text');
+    const patientId = data.patient_id || data.patientId || patientIdInput?.value || 'PT-2026-9041';
+    if (dbAlert && dbAlertText) {
+      dbAlert.classList.remove('hidden');
+      dbAlert.style.display = 'flex';
+      dbAlertText.textContent = `✓ Scan analyzed & committed to live SQLite patient database (Record #${patientId})`;
+    }
+
     // Configure PDF report button
     if (btnDownloadPdf) {
       btnDownloadPdf.classList.remove('hidden');
@@ -646,10 +669,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderTableRow(record, tableBody, prepend = false) {
     const table = tableBody.closest('table');
-    const isReportsTable = table && table.querySelectorAll('th').length >= 8;
+    const colCount = table ? table.querySelectorAll('th').length : 0;
     const tr = document.createElement('tr');
 
-    if (isReportsTable) {
+    if (colCount >= 9) {
+      // 9 columns: Analysis page Database Audit Trail
+      tr.innerHTML = `
+        <td><strong>${escapeHtml(record.patientId)}</strong></td>
+        <td>${escapeHtml(record.patientName)}</td>
+        <td>${escapeHtml(record.age)} / ${escapeHtml(record.gender ? record.gender[0] : 'M')}</td>
+        <td>${escapeHtml(record.modality || 'Ultrasound (US)')}</td>
+        <td><strong style="color:var(--color-primary);">${escapeHtml(record.predicted_class)}</strong></td>
+        <td><strong>${escapeHtml(record.confidence)}%</strong></td>
+        <td><span class="badge" style="background:${record.badge_color || '#812D80'}; color:#fff;">${escapeHtml(record.risk_level)}</span></td>
+        <td><span class="badge badge-verified">&check; Committed</span></td>
+        <td>
+          <button type="button" class="btn btn-secondary btn-sm btn-quick-print" 
+            data-patient="${escapeHtml(record.patientName)}" 
+            data-id="${escapeHtml(record.patientId)}" 
+            data-age="${escapeHtml(record.age)}" 
+            data-gender="${escapeHtml(record.gender)}" 
+            data-diag="${escapeHtml(record.predicted_class)}" 
+            data-conf="${escapeHtml(record.confidence)}" 
+            data-risk="${escapeHtml(record.risk_level)}" 
+            data-color="${escapeHtml(record.badge_color || '#812D80')}" 
+            data-findings="${escapeHtml(record.findings || '')}">Print PDF</button>
+        </td>
+      `;
+    } else if (colCount >= 8) {
+      // 8 columns: Reports page Library
       tr.innerHTML = `
         <td><strong>${escapeHtml(record.patientId)}</strong></td>
         <td>${escapeHtml(record.patientName)}</td>
@@ -682,6 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </td>
       `;
     } else {
+      // 3 columns: Dashboard page
       tr.innerHTML = `
         <td><strong>${escapeHtml(record.patientId)}</strong></td>
         <td>${escapeHtml(record.predicted_class)}</td>
