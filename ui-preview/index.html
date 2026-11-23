@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Liv-Sensi – Intelligence Beyond Imaging</title>
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#812D80">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Liv-Sensi">
+  <link rel="apple-touch-icon" href="assets/images/apple_touch_icon.png">
+  <link rel="icon" type="image/png" href="assets/images/livsensi_icon_192.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+
+  <style>
+    /* Landing Hero Custom Styles - Perfectly Centered Executive Layout */
+    .hero-section {
+      position: relative;
+      min-height: calc(88vh - var(--header-height));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 5rem;
+      background: radial-gradient(circle at 50% 25%, rgba(229, 37, 145, 0.08), transparent 60%),
+                  radial-gradient(circle at 20% 75%, rgba(129, 45, 128, 0.06), transparent 60%),
+                  #FFFFFF;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-grid {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1.75rem;
+      z-index: 2;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      align-self: center;
+      background: rgba(129, 45, 128, 0.08);
+      border: 1px solid rgba(129, 45, 128, 0.2);
+      color: var(--color-primary);
+      padding: 0.4rem 1.15rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0 auto;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-secondary);
+      box-shadow: 0 0 8px var(--color-secondary);
+    }
+
+    .hero-title {
+      font-size: 3.8rem;
+      font-weight: 800;
+      line-height: 1.16;
+      color: var(--color-text);
+      letter-spacing: -0.03em;
+      max-width: 840px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-title span {
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin: 0.5rem auto 0;
+    }
+
+    .hero-stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--color-border);
+      margin: 2rem auto 0;
+      width: 100%;
+      max-width: 860px;
+      text-align: center;
+    }
+
+    .hero-stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0.35rem;
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      text-align: center;
+      max-width: 170px;
+      margin: 0 auto;
+    }
+
+    /* Section Containers */
+    .section-wrap {
+      max-width: var(--max-content-width);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all var(--transition-normal);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(129, 45, 128, 0.4);
+    }
+
+    .feature-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(129, 45, 128, 0.08);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    /* Footer */
+    .hv-footer {
+      background: #FAF6FA;
+      border-top: 1px solid var(--color-border);
+      padding: 3.5rem 2rem 2rem;
+    }
+
+    .footer-grid {
+      max-width: var(--max-content-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .footer-bottom {
+      max-width: var(--max-content-width);
+      margin: 1.5rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+    }
+
+    @media (max-width: 1024px) {
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.8rem; }
+      .hero-stats-strip { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+
+    /* Mobile Screen Optimization (< 768px) */
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+      }
+      .hero-section {
+        padding: 3rem 1.15rem 2.25rem !important;
+        min-height: auto !important;
+      }
+      .hero-title {
+        font-size: 1.85rem !important;
+        line-height: 1.22 !important;
+      }
+      .hero-subtitle {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+      }
+      .hero-cta-group {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+      }
+      .hero-cta-group .btn {
+        width: 100% !important;
+        justify-content: center;
+        text-align: center;
+        min-height: 48px;
+        font-size: 0.95rem;
+      }
+      .hero-stats-strip {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.85rem !important;
+        padding: 1.25rem 0.75rem !important;
+        margin-top: 1.5rem !important;
+        background: #FAF6FA !important;
+        border: 1px solid rgba(129, 45, 128, 0.15) !important;
+        border-radius: var(--radius-lg) !important;
+      }
+      .hero-stat-item {
+        padding: 0.4rem 0.2rem !important;
+      }
+      .hero-stat-num {
+        font-size: 1.55rem !important;
+      }
+      .hero-stat-label {
+        font-size: 0.72rem !important;
+      }
+      .footer-grid {
+        flex-direction: column !important;
+        gap: 1.75rem !important;
+      }
+      .footer-bottom {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        text-align: center !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Global Header -->
+  <header class="hv-navbar">
+    <div class="hv-navbar-container">
+      <a href="index.html" class="hv-brand">
+        <div class="hv-brand-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M12 5v14"/>
+          </svg>
+        </div>
+        <div>
+          <div class="hv-brand-name">LIV-SENSI <span>AI</span></div>
+          <div class="hv-brand-tagline">Intelligence Beyond Imaging</div>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="hv-nav-menu">
+          <li><a href="index.html" class="hv-nav-link active">Home</a></li>
+          <li><a href="pages/dashboard.html" class="hv-nav-link">Dashboard</a></li>
+          <li><a href="pages/analysis.html" class="hv-nav-link">AI Workspace</a></li>
+          <li><a href="pages/literature.html" class="hv-nav-link">Literature Review</a></li>
+          <li><a href="pages/models.html" class="hv-nav-link">Model Laboratory</a></li>
+          <li><a href="pages/evaluation.html" class="hv-nav-link">Evaluation</a></li>
+        </ul>
+      </nav>
+
+      <div class="hv-nav-actions">
+        <a href="pages/analysis.html" class="btn btn-primary btn-sm"><span class="desktop-only">Open AI Workspace</span><span class="mobile-only-inline">Workspace</span></a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Hero Section with Three.js 3D Anatomical Liver -->
+  <section class="hero-section">
+    <div class="hero-grid">
+      <!-- Left Hero Pitch -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Deep Learning Research Platform
+        </div>
+
+        <h1 class="hero-title">
+          See Beyond the Image.<br>
+          <span>Discover Deeper Insights.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          An intelligent liver imaging research platform combining deep learning, explainable AI and scientific evaluation for early hepatic pathology detection.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="pages/dashboard.html" class="btn btn-primary btn-lg">Explore Research</a>
+          <a href="pages/analysis.html" class="btn btn-secondary btn-lg">Open AI Workspace</a>
+        </div>
+
+        <!-- Research Stats Strip -->
+        <div class="hero-stats-strip">
+          <div class="hero-stat-item">
+            <div class="hero-stat-num">4</div>
+            <div class="hero-stat-label">Published Literature Studies</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-num">6</div>
+            <div class="hero-stat-label">Deep Architectures</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-num">2</div>
+            <div class="hero-stat-label">Modality Pipelines (US & CT)</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-num">Grad-CAM</div>
+            <div class="hero-stat-label">Spatial Explainability</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-Task Research Architecture Section -->
+  <section class="section-wrap" style="background: #FAF6FA;">
+    <div class="section-header">
+      <span class="section-tag">Scientific Methodology</span>
+      <h2 class="section-title">Two Distinct Clinical Research Tasks</h2>
+      <p>Decoupling hepatic ultrasonic classification from high-resolution CT segmentation ensures modality-specific rigor.</p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Task A -->
+      <div class="feature-card">
+        <div class="feature-icon-box">🔬</div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="font-size:1.35rem;">TASK A: Ultrasound Classification</h3>
+          <span class="badge badge-literature">Classification</span>
+        </div>
+        <p>Primary focus on differentiating <strong>Healthy Parenchyma</strong> from <strong>Hepatic Steatosis (Fatty Liver)</strong> using acoustic attenuation and texture descriptors.</p>
+        <div style="background: #F5EEF6; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.8rem; border: 1px solid var(--color-border);">
+          <strong>Target Evaluation Metrics:</strong> Accuracy, Sensitivity (Recall), Specificity, ROC-AUC, and Confusion Matrix.
+        </div>
+      </div>
+
+      <!-- Task B -->
+      <div class="feature-card">
+        <div class="feature-icon-box" style="background: rgba(229, 37, 145, 0.08); color: var(--color-secondary);">🩻</div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="font-size:1.35rem;">TASK B: CT Liver & Tumor Segmentation</h3>
+          <span class="badge badge-experimental">Segmentation</span>
+        </div>
+        <p>Volumetric identification of parenchymal contours and localized focal neoplasms (HCC) on contrast-enhanced CT scans, validated against the LiTS benchmark.</p>
+        <div style="background: #F5EEF6; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.8rem; border: 1px solid var(--color-border);">
+          <strong>Target Evaluation Metrics:</strong> Dice Similarity Coefficient, Intersection over Union (IoU), and Surface Distance.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Six Model Architecture Showcase -->
+  <section class="section-wrap">
+    <div class="section-header">
+      <span class="section-tag">Deep Learning Laboratory</span>
+      <h2 class="section-title">Six Neural Network Architectures</h2>
+      <p>Benchmarking state-of-the-art vision backbones against our verified DenseNet-121 baseline.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="feature-card">
+        <div style="display:flex; justify-content:space-between;">
+          <h4>VGG16</h4>
+          <span class="badge badge-baseline">Baseline Stack</span>
+        </div>
+        <p>138.4M parameters. Deep 3x3 convolution stacks establishing baseline acoustic feature capture.</p>
+      </div>
+
+      <div class="feature-card">
+        <div style="display:flex; justify-content:space-between;">
+          <h4>VGG19</h4>
+          <span class="badge badge-literature">Villanueva et al.</span>
+        </div>
+        <p>143.7M parameters. Extended 19-layer hierarchy evaluated across 1,895 ultrasound images.</p>
+      </div>
+
+      <div class="feature-card">
+        <div style="display:flex; justify-content:space-between;">
+          <h4>ResNet50V2</h4>
+          <span class="badge badge-experimental">Residual</span>
+        </div>
+        <p>25.6M parameters. Pre-activation identity shortcuts enabling gradient propagation without degradation.</p>
+      </div>
+
+      <div class="feature-card">
+        <div style="display:flex; justify-content:space-between;">
+          <h4>DenseNet-201</h4>
+          <span class="badge badge-not-trained">Planned</span>
+        </div>
+        <p>20.0M parameters. 201-layer deep feature reuse maximizing multi-scale representation efficiency.</p>
+      </div>
+
+      <div class="feature-card">
+        <div style="display:flex; justify-content:space-between;">
+          <h4>Inception-ResNet-v2</h4>
+          <span class="badge badge-not-implemented">Planned</span>
+        </div>
+        <p>55.8M parameters. Dual multiscale filter factorizations merged with residual skip pathways.</p>
+      </div>
+
+      <div class="feature-card" style="border: 1px solid var(--color-secondary);">
+        <div style="display:flex; justify-content:space-between;">
+          <h4 style="color: var(--color-secondary);">Multi-Scale CNN</h4>
+          <span class="badge badge-literature">PMID: 34097226</span>
+        </div>
+        <p>Specialized dilated and multiscale kernels tailored for diffuse hepatic ultrasound speckle variance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Literature Review Section -->
+  <section class="section-wrap" style="background: #FAF6FA;">
+    <div class="section-header">
+      <span class="section-tag">Published Research</span>
+      <h2 class="section-title">Literature Review Studies</h2>
+      <p>Direct references from university research scope. Values represent published findings.</p>
+    </div>
+
+    <!-- Desktop View: Structured Comparison Table -->
+    <div class="desktop-only data-table-wrapper" style="background: #fff;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Study / Reference</th>
+            <th>Imaging Modality</th>
+            <th>Reported Methodology</th>
+            <th>Literature-Reported Results</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Study 1 (PMID: 34097226)</strong></td>
+            <td>Ultrasound (US)</td>
+            <td>Multi-feature guided multi-scale residual CNN</td>
+            <td><strong style="color: #812D80;">Accuracy &gt; 90% | AUC 97.8% (LOOCV)</strong></td>
+            <td><span class="badge badge-literature">Published</span></td>
+          </tr>
+          <tr>
+            <td><strong>Study 2 (Byra et al., JUM 2021)</strong></td>
+            <td>Ultrasound (US, 4 views)</td>
+            <td>Transfer-learning CNN with MRI-PDFF truth (135 subjects)</td>
+            <td><strong style="color: #812D80;">AUC 0.90 for Fatty Liver</strong></td>
+            <td><span class="badge badge-literature">Published</span></td>
+          </tr>
+          <tr>
+            <td><strong>Study 3 (Villanueva et al., SPP 2021)</strong></td>
+            <td>Ultrasound (1,895 images)</td>
+            <td>VGG19 Transfer Learning (5 disease classes)</td>
+            <td><strong style="color: #812D80;">86.7% Test Accuracy</strong></td>
+            <td><span class="badge badge-literature">Published</span></td>
+          </tr>
+          <tr>
+            <td><strong>Study 4 (Bilic et al., LiTS Benchmark)</strong></td>
+            <td>Abdominal CT (201 volumes)</td>
+            <td>75 algorithms evaluated on liver &amp; lesion segmentation</td>
+            <td><strong style="color: #E52591;">Liver Dice 0.963 | Tumor Dice 0.739</strong></td>
+            <td><span class="badge badge-literature">Benchmark</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile View: Responsive Clinical Cards -->
+    <div class="mobile-only literature-mobile-cards">
+      <!-- Study 1 -->
+      <div class="card lit-mob-card">
+        <div class="lit-mob-header">
+          <div>
+            <span class="badge badge-literature" style="font-size:0.7rem;">Study 1 &bull; Ultrasound NAFLD</span>
+            <h4 class="lit-mob-title">Multi-scale Residual CNN</h4>
+            <div class="lit-mob-sub">PMID: 34097226 &bull; LOOCV Validated</div>
+          </div>
+          <span class="badge badge-verified">US</span>
+        </div>
+        <div class="lit-mob-method">
+          <strong>Methodology:</strong> Multi-feature guided multi-scale residual CNN designed for acoustic attenuation &amp; micro-speckle parenchymal descriptors.
+        </div>
+        <div class="lit-mob-result">
+          <span class="lit-mob-result-label">Literature Result:</span>
+          <span class="lit-mob-result-val">Accuracy &gt; 90% | AUC 97.8%</span>
+        </div>
+      </div>
+
+      <!-- Study 2 -->
+      <div class="card lit-mob-card">
+        <div class="lit-mob-header">
+          <div>
+            <span class="badge badge-literature" style="font-size:0.7rem;">Study 2 &bull; MRI-PDFF Truth</span>
+            <h4 class="lit-mob-title">Byra et al. (JUM 2021)</h4>
+            <div class="lit-mob-sub">135 Subjects &bull; 4 Ultrasound Views</div>
+          </div>
+          <span class="badge badge-verified">US</span>
+        </div>
+        <div class="lit-mob-method">
+          <strong>Methodology:</strong> Transfer-learning CNN calibrated against MRI Proton Density Fat Fraction (MRI-PDFF) reference truth.
+        </div>
+        <div class="lit-mob-result">
+          <span class="lit-mob-result-label">Literature Result:</span>
+          <span class="lit-mob-result-val">AUC 0.90 for Fatty Liver</span>
+        </div>
+      </div>
+
+      <!-- Study 3 -->
+      <div class="card lit-mob-card">
+        <div class="lit-mob-header">
+          <div>
+            <span class="badge badge-literature" style="font-size:0.7rem;">Study 3 &bull; Deep VGG19</span>
+            <h4 class="lit-mob-title">Villanueva et al. (SPP 2021)</h4>
+            <div class="lit-mob-sub">1,895 B-Mode Clinical Images</div>
+          </div>
+          <span class="badge badge-verified">5 Classes</span>
+        </div>
+        <div class="lit-mob-method">
+          <strong>Methodology:</strong> Deep VGG19 transfer learning architecture optimized for multi-class hepatic disease categorization.
+        </div>
+        <div class="lit-mob-result">
+          <span class="lit-mob-result-label">Literature Result:</span>
+          <span class="lit-mob-result-val">86.7% Test Accuracy</span>
+        </div>
+      </div>
+
+      <!-- Study 4 -->
+      <div class="card lit-mob-card">
+        <div class="lit-mob-header">
+          <div>
+            <span class="badge badge-literature" style="font-size:0.7rem;">Study 4 &bull; LiTS Benchmark</span>
+            <h4 class="lit-mob-title">Bilic et al. (LiTS 2017–2023)</h4>
+            <div class="lit-mob-sub">Abdominal CT &bull; 201 Contrast Volumes</div>
+          </div>
+          <span class="badge badge-experimental">CT</span>
+        </div>
+        <div class="lit-mob-method">
+          <strong>Methodology:</strong> International competitive benchmark evaluating 75 deep architectures on 3D volumetric liver &amp; lesion segmentation.
+        </div>
+        <div class="lit-mob-result" style="border-left-color: var(--color-secondary);">
+          <span class="lit-mob-result-label">Benchmark Result:</span>
+          <span class="lit-mob-result-val" style="color: var(--color-secondary);">Liver Dice 0.963 | Tumor Dice 0.739</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="hv-footer">
+    <div class="footer-grid">
+      <div>
+        <div class="hv-brand-name" style="font-size:1.3rem;">LIV-SENSI <span>AI</span></div>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem; max-width: 320px;">
+          Next-generation deep learning research platform for early hepatic disease detection and volumetric segmentation.
+        </p>
+      </div>
+      <div>
+        <h5 style="margin-bottom:0.75rem;">Research Navigation</h5>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.4rem; font-size:0.85rem;">
+          <li><a href="pages/dashboard.html">Research Dashboard</a></li>
+          <li><a href="pages/analysis.html">AI Imaging Workspace</a></li>
+          <li><a href="pages/models.html">Model Research Laboratory</a></li>
+          <li><a href="pages/literature.html">Literature Review</a></li>
+          <li><a href="pages/evaluation.html">Scientific Evaluation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 style="margin-bottom:0.75rem;">Data Provenance</h5>
+        <p style="font-size: 0.82rem; max-width: 300px;">
+          Adheres to FAIR data principles. LiTS benchmark license CC BY-NC-SA 4.0. Ultrasound protocols MRI-PDFF calibrated.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Liv-Sensi. Academic &amp; Clinical Research Suite.</span>
+      <span>Clinical AI Imaging Research Platform</span>
+    </div>
+  </footer>
+
+  <!-- Mobile Native App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-tab active">
+      <span class="mobile-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="pages/dashboard.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="pages/analysis.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🔬</span>
+      <span>Workspace</span>
+    </a>
+    <a href="pages/literature.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📚</span>
+      <span>Literature</span>
+    </a>
+    <a href="pages/reports.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📋</span>
+      <span>Reports</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="assets/js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#812D80">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Liv-Sensi">
+  <link rel="apple-touch-icon" href="../assets/images/apple_touch_icon.png">
+  <link rel="icon" type="image/png" href="../assets/images/livsensi_icon_192.png">
+  <title>AI Imaging Workspace – Liv-Sensi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="hv-navbar">
+    <div class="hv-navbar-container">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <button id="btn-toggle-sidebar" class="btn btn-ghost btn-sm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <a href="../index.html" class="hv-brand">
+          <div class="hv-brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v14"/></svg>
+          </div>
+          <div class="hv-brand-name">LIV-SENSI <span>AI</span></div>
+        </a>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <a href="dashboard.html" class="btn btn-secondary btn-sm">&larr; Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- App Shell -->
+  <div class="hv-app-shell">
+    <!-- Mobile Drawer Backdrop -->
+    <div class="sidebar-backdrop"></div>
+    <!-- Sidebar Navigation -->
+    <aside class="hv-sidebar">
+      <div class="hv-sidebar-header">
+        <span class="hv-sidebar-title">Research Modules</span>
+        <button class="btn-close-sidebar-mobile" title="Close Menu">&times;</button>
+      </div>
+      <nav class="hv-sidebar-nav">
+        <a href="dashboard.html" data-tooltip="Research Dashboard" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📊</span>
+          <span>Research Dashboard</span>
+        </a>
+        <a href="analysis.html" data-tooltip="AI Image Workspace" class="hv-sidebar-item active">
+          <span class="hv-sidebar-icon">🔬</span>
+          <span>AI Image Workspace</span>
+        </a>
+        <a href="literature.html" data-tooltip="Literature Review" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📚</span>
+          <span>Literature Review</span>
+        </a>
+        <a href="models.html" data-tooltip="Model Laboratory" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🧬</span>
+          <span>Model Laboratory</span>
+        </a>
+        <a href="datasets.html" data-tooltip="Dataset Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📁</span>
+          <span>Dataset Center</span>
+        </a>
+        <a href="evaluation.html" data-tooltip="Model Evaluation" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📈</span>
+          <span>Model Evaluation</span>
+        </a>
+        <a href="training.html" data-tooltip="Training Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">⚙️</span>
+          <span>Training Center</span>
+        </a>
+        <a href="explainability.html" data-tooltip="Explainable AI" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔍</span>
+          <span>Explainable AI</span>
+        </a>
+        <a href="reports.html" data-tooltip="Research Reports" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📄</span>
+          <span>Research Reports</span>
+        </a>
+      </nav>
+      <div style="padding: 1rem 1.25rem; border-top: 1px solid var(--color-border-subtle); font-size: 0.75rem;">
+        <a href="../index.html" style="color:var(--color-primary); font-weight:600;">&larr; Return to Landing</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="hv-main-content">
+
+      <!-- Quick Preset Demonstrator -->
+      <div class="card" style="margin-bottom: 1.5rem; padding: 1.25rem 1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div style="font-weight:700; font-size:0.95rem;">Quick Demonstration Presets (Load Sample Scans):</div>
+            <div style="font-size:0.78rem; color:var(--color-text-muted);">Select a pathology scenario to preview local imaging &amp; Grad-CAM overlay</div>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary btn-sm preview-preset-btn active"
+              data-scan="../sample_scans/sample_normal_liver.png"
+              data-heat="../sample_scans/sample_normal_liver.png"
+              data-title="Normal Liver (Control Baseline)"
+              data-conf="98.1%"
+              data-risk="LOW RISK">
+              🟢 Normal Scan
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm preview-preset-btn"
+              data-scan="../sample_scans/sample_fatty_liver.png"
+              data-heat="../sample_scans/sample_fatty_liver.png"
+              data-title="Fatty Liver (Hepatic Steatosis - NAFLD)"
+              data-conf="95.4%"
+              data-risk="MODERATE RISK">
+              🟡 Fatty Liver
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm preview-preset-btn"
+              data-scan="../sample_scans/sample_cirrhosis_liver.png"
+              data-heat="../sample_scans/sample_cirrhosis_liver.png"
+              data-title="Liver Cirrhosis (Severe Fibrosis)"
+              data-conf="96.8%"
+              data-risk="HIGH RISK">
+              🔴 Cirrhosis
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm preview-preset-btn"
+              data-scan="../sample_scans/sample_liver_tumor.png"
+              data-heat="../sample_scans/sample_liver_tumor.png"
+              data-title="Focal Hepatic Lesion / Tumor"
+              data-conf="97.2%"
+              data-risk="CRITICAL RISK">
+              🟣 Liver Tumor
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-Column Workspace: Intake & Radiology Console -->
+      <div style="display:grid; grid-template-columns: 1fr 1.25fr; gap:1.75rem;">
+        <!-- Left: Image Upload & Patient Intake -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Scan Intake &amp; Metadata</h3>
+            <span class="badge badge-verified">Live PyTorch Connected</span>
+          </div>
+
+          <!-- Dropzone -->
+          <div class="dropzone-box" id="preview-dropzone" style="margin-bottom: 1.5rem;">
+            <input type="file" id="preview-file-input" accept="image/*" class="hidden">
+            <div class="dropzone-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.25rem;">Upload Ultrasound or CT Scan</div>
+            <p style="font-size:0.75rem;">Drag and drop file here, or click to browse</p>
+            <div id="preview-file-name" style="font-size:0.75rem; color:var(--color-secondary); font-weight:600; margin-top:0.5rem;">Preset: Normal Scan</div>
+          </div>
+
+          <!-- Patient Information Inputs (Live Connected) -->
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; font-size:0.85rem; margin-bottom: 1.25rem;">
+            <div>
+              <label style="font-weight:600; font-size:0.78rem; color:var(--color-text-muted);">Patient ID</label>
+              <input type="text" id="patient-id-input" value="PT-2026-9041" style="width:100%; padding:0.55rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); margin-top:0.25rem;">
+            </div>
+            <div>
+              <label style="font-weight:600; font-size:0.78rem; color:var(--color-text-muted);">Patient Name</label>
+              <input type="text" id="patient-name-input" value="Suresh Patel" style="width:100%; padding:0.55rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); margin-top:0.25rem;">
+            </div>
+            <div>
+              <label style="font-weight:600; font-size:0.78rem; color:var(--color-text-muted);">Age</label>
+              <input type="number" id="patient-age-input" value="34" style="width:100%; padding:0.55rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); margin-top:0.25rem;">
+            </div>
+            <div>
+              <label style="font-weight:600; font-size:0.78rem; color:var(--color-text-muted);">Gender</label>
+              <select id="patient-gender-input" style="width:100%; padding:0.55rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); margin-top:0.25rem;">
+                <option value="Male" selected>Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div style="grid-column: span 2;">
+              <label style="font-weight:600; font-size:0.78rem; color:var(--color-text-muted);">Clinical Indications / Symptoms</label>
+              <input type="text" id="patient-symptoms-input" value="Routine Executive Health Screening (Asymptomatic)" style="width:100%; padding:0.55rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); margin-top:0.25rem;">
+            </div>
+            <div style="grid-column: span 2;">
+              <label style="font-weight:600; font-size:0.78rem; color:var(--color-text-muted);">Enzyme Biomarkers (ALT / AST)</label>
+              <input type="text" id="patient-enzymes-input" value="ALT: 22 U/L, AST: 20 U/L (Normal Reference)" style="width:100%; padding:0.55rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); margin-top:0.25rem;">
+            </div>
+          </div>
+
+          <!-- Run Analysis Button -->
+          <button type="button" class="btn btn-primary" id="btn-run-analysis" style="width:100%; padding:0.85rem; font-size:0.95rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span id="analyze-btn-text">Run Real Deep Learning Diagnostic &amp; Grad-CAM</span>
+            <div class="spinner hidden" id="analyze-spinner" style="width:16px; height:16px; border:2px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite;"></div>
+          </button>
+        </div>
+
+        <!-- Right: Dual-Layer Radiology Viewer & Real Explainability -->
+        <div class="card" id="preview-outcome-box">
+          <div class="card-header">
+            <div>
+              <div style="font-size:0.75rem; text-transform:uppercase; color:var(--color-text-muted); font-weight:700;">Live AI Prediction:</div>
+              <h3 class="card-title" id="outcome-class-title" style="color:var(--color-primary); font-size:1.35rem;">Normal Liver (Control Baseline)</h3>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="badge badge-verified" id="outcome-risk-badge" style="background:#10b981; color:#fff;">LOW RISK</span>
+              <span class="badge badge-baseline" id="outcome-conf-val">98.1% Confidence</span>
+            </div>
+          </div>
+
+          <!-- Dual Layer Viewer -->
+          <div class="viewer-container">
+            <div class="viewer-toolbar">
+              <div class="viewer-slider-group">
+                <span>Grad-CAM Blend:</span>
+                <input type="range" id="blend-slider" min="0" max="100" value="70">
+                <span id="blend-val-label" style="min-width:35px; color:var(--color-secondary); font-weight:700;">70%</span>
+              </div>
+              <div style="display:flex; gap:0.35rem;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-zoom-in" title="Zoom In">+</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-zoom-out" title="Zoom Out">-</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-zoom-reset" title="Reset Zoom">Reset</button>
+              </div>
+            </div>
+
+            <div class="viewer-canvas" id="viewer-box">
+              <img id="preview-scan-img" class="viewer-scan-img" src="../sample_scans/sample_normal_liver.png" alt="Scan">
+              <img id="preview-heat-img" class="viewer-heat-img" src="../sample_scans/sample_normal_liver.png" alt="Heatmap">
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.65rem; font-size:0.7rem; color:var(--color-text-muted);">
+              <span>Low Activation (Parenchymal Baseline)</span>
+              <div style="flex:1; height:6px; margin:0 1rem; border-radius:4px; background:linear-gradient(90deg, #812D80, #E52591, #FFDE59);"></div>
+              <span>High Activation (Pathology Focus)</span>
+            </div>
+          </div>
+
+          <!-- Findings & Scientific Advice -->
+          <div style="margin-top: 1.25rem; font-size:0.85rem; color:var(--color-text-muted);">
+            <div style="font-weight:700; color:var(--color-text); margin-bottom:0.25rem;">Real Neural Network &amp; Radiological Findings:</div>
+            <p id="outcome-findings-text" style="font-size:0.8rem; line-height:1.45; margin-bottom:0.75rem;">
+              Liver parenchyma demonstrates uniform density/echogenicity with smooth anatomic margins. Vascular architecture clearly visualized.
+            </p>
+            <div style="font-weight:700; color:var(--color-text); margin-bottom:0.25rem;">Recommended Clinical Next Steps:</div>
+            <div id="outcome-recommendations-list" style="font-size:0.78rem; line-height:1.45; margin-bottom:1.25rem;">
+              • Routine annual preventive health check-up.<br>
+              • Maintain balanced Mediterranean diet and regular physical activity.
+            </div>
+
+            <a id="btn-download-pdf-report" href="#" target="_blank" class="btn btn-primary btn-sm" style="width:100%; justify-content:center; gap:0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Real Official Clinical PDF Report
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/navigation.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <!-- Mobile Native App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="../index.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="analysis.html" class="mobile-nav-tab active">
+      <span class="mobile-nav-icon">🔬</span>
+      <span>Workspace</span>
+    </a>
+    <a href="literature.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📚</span>
+      <span>Literature</span>
+    </a>
+    <a href="reports.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📋</span>
+      <span>Reports</span>
+    </a>
+  </nav>
+
+</body>
+</html>

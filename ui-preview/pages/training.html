@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#812D80">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Liv-Sensi">
+  <link rel="apple-touch-icon" href="../assets/images/apple_touch_icon.png">
+  <link rel="icon" type="image/png" href="../assets/images/livsensi_icon_192.png">
+  <title>Training Center – Liv-Sensi</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="hv-navbar">
+    <div class="hv-navbar-container">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <button id="btn-toggle-sidebar" class="btn btn-ghost btn-sm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <a href="../index.html" class="hv-brand">
+          <div class="hv-brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v14"/></svg>
+          </div>
+          <div class="hv-brand-name">LIV-SENSI <span>AI</span></div>
+        </a>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <a href="explainability.html" class="btn btn-primary btn-sm"><span class="desktop-only">Explainable AI</span><span class="mobile-only-inline">XAI</span> &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="hv-app-shell">
+    <!-- Mobile Drawer Backdrop -->
+    <div class="sidebar-backdrop"></div>
+    <!-- Sidebar -->
+    <aside class="hv-sidebar">
+      <div class="hv-sidebar-header">
+        <span class="hv-sidebar-title">Research Modules</span>
+        <button class="btn-close-sidebar-mobile" title="Close Menu">&times;</button>
+      </div>
+      <nav class="hv-sidebar-nav">
+        <a href="dashboard.html" data-tooltip="Research Dashboard" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📊</span>
+          <span>Research Dashboard</span>
+        </a>
+        <a href="analysis.html" data-tooltip="AI Image Workspace" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔬</span>
+          <span>AI Image Workspace</span>
+        </a>
+        <a href="literature.html" data-tooltip="Literature Review" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📚</span>
+          <span>Literature Review</span>
+        </a>
+        <a href="models.html" data-tooltip="Model Laboratory" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🧬</span>
+          <span>Model Laboratory</span>
+        </a>
+        <a href="datasets.html" data-tooltip="Dataset Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📁</span>
+          <span>Dataset Center</span>
+        </a>
+        <a href="evaluation.html" data-tooltip="Model Evaluation" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📈</span>
+          <span>Model Evaluation</span>
+        </a>
+        <a href="training.html" data-tooltip="Training Center" class="hv-sidebar-item active">
+          <span class="hv-sidebar-icon">⚙️</span>
+          <span>Training Center</span>
+        </a>
+        <a href="explainability.html" data-tooltip="Explainable AI" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔍</span>
+          <span>Explainable AI</span>
+        </a>
+        <a href="reports.html" data-tooltip="Research Reports" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📄</span>
+          <span>Research Reports</span>
+        </a>
+      </nav>
+      <div style="padding: 1rem 1.25rem; border-top: 1px solid var(--color-border-subtle); font-size: 0.75rem;">
+        <a href="../index.html" style="color:var(--color-primary); font-weight:600;">&larr; Return to Landing</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="hv-main-content">
+        
+      <div style="margin-bottom: 2rem;">
+        <h2 class="page-title">Training Experiments &amp; Convergence</h2>
+        <p>Loss convergence history, reproducible optimization parameters, and model weight checkpoints.</p>
+      </div>
+
+      <!-- Two Column: Loss Curves & Experiment Parameters -->
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr; gap:1.75rem; margin-bottom:2rem;">
+        
+        <!-- Loss Curve Card -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Categorical Cross-Entropy Loss Convergence</h3>
+              <span class="card-subtitle">50 Epochs &bull; Cosine Annealing Learning Rate Schedule</span>
+            </div>
+            <span class="badge badge-baseline">DenseNet-121 Log</span>
+          </div>
+
+          <div style="height: 320px; position: relative;">
+            <canvas id="training-loss-chart-canvas"></canvas>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; margin-top:1rem; font-size:0.78rem; color:var(--color-text-muted);">
+            <div>Initial Loss: <strong>1.320</strong></div>
+            <div>Final Convergence: <strong style="color:var(--color-primary);">0.134</strong></div>
+            <div>Early Stopping Patience: <strong>12 Epochs</strong></div>
+          </div>
+        </div>
+
+        <!-- Hyperparameters & Reproducibility Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Training Protocol Configuration</h3>
+            <span class="badge badge-literature">Reproducible</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.85rem; font-size:0.85rem;">
+            <div style="background:var(--color-surface); padding:0.75rem 1rem; border-radius:var(--radius-sm); display:flex; justify-content:space-between;">
+              <span style="color:var(--color-text-muted);">Optimizer:</span>
+              <strong>AdamW (Weight Decay: 1e-4)</strong>
+            </div>
+
+            <div style="background:var(--color-surface); padding:0.75rem 1rem; border-radius:var(--radius-sm); display:flex; justify-content:space-between;">
+              <span style="color:var(--color-text-muted);">Base Learning Rate:</span>
+              <strong style="font-family:var(--font-mono);">1e-4 (Warmup: 5 Epochs)</strong>
+            </div>
+
+            <div style="background:var(--color-surface); padding:0.75rem 1rem; border-radius:var(--radius-sm); display:flex; justify-content:space-between;">
+              <span style="color:var(--color-text-muted);">LR Scheduler:</span>
+              <strong>CosineAnnealingLR (eta_min: 1e-6)</strong>
+            </div>
+
+            <div style="background:var(--color-surface); padding:0.75rem 1rem; border-radius:var(--radius-sm); display:flex; justify-content:space-between;">
+              <span style="color:var(--color-text-muted);">Batch Size:</span>
+              <strong>32 (Mixed Precision FP16)</strong>
+            </div>
+
+            <div style="background:var(--color-surface); padding:0.75rem 1rem; border-radius:var(--radius-sm); display:flex; justify-content:space-between;">
+              <span style="color:var(--color-text-muted);">Data Augmentations:</span>
+              <strong>RandomAffine, CLAHE, Speckle</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Checkpoint History Table -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Model Checkpoint Serialization History</h3>
+          <span class="badge badge-baseline">Saved Checkpoints</span>
+        </div>
+
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Checkpoint File</th>
+                <th>Architecture</th>
+                <th>Epoch</th>
+                <th>Validation Loss</th>
+                <th>Validation Accuracy</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>densenet121_best_epoch38.pt</code></td>
+                <td>DenseNet-121</td>
+                <td>Epoch 38 / 50</td>
+                <td><strong>0.134</strong></td>
+                <td><strong style="color:var(--color-primary);">96.4%</strong></td>
+                <td><span class="badge badge-verified">Active Weights</span></td>
+              </tr>
+              <tr>
+                <td><code>resnet50v2_checkpoint_ep25.pt</code></td>
+                <td>ResNet50V2</td>
+                <td>Epoch 25 / 50</td>
+                <td><strong>0.198</strong></td>
+                <td><strong>89.8%</strong></td>
+                <td><span class="badge badge-experimental">Standby Weights</span></td>
+              </tr>
+              <tr>
+                <td><code>vgg16_baseline_ep30.pt</code></td>
+                <td>VGG16</td>
+                <td>Epoch 30 / 50</td>
+                <td><strong>0.242</strong></td>
+                <td><strong>85.4%</strong></td>
+                <td><span class="badge badge-baseline">Archived Baseline</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/charts.js"></script>
+  <script src="../assets/js/navigation.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.HepatoCharts) {
+        window.HepatoCharts.createTrainingLossChart('training-loss-chart-canvas');
+      }
+    });
+  </script>
+  <!-- Mobile Native App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="../index.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="analysis.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🔬</span>
+      <span>Workspace</span>
+    </a>
+    <a href="literature.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📚</span>
+      <span>Literature</span>
+    </a>
+    <a href="reports.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📋</span>
+      <span>Reports</span>
+    </a>
+  </nav>
+
+</body>
+</html>

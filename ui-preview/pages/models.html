@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#812D80">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Liv-Sensi">
+  <link rel="apple-touch-icon" href="../assets/images/apple_touch_icon.png">
+  <link rel="icon" type="image/png" href="../assets/images/livsensi_icon_192.png">
+  <title>Model Research Laboratory – Liv-Sensi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="hv-navbar">
+    <div class="hv-navbar-container">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <button id="btn-toggle-sidebar" class="btn btn-ghost btn-sm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <a href="../index.html" class="hv-brand">
+          <div class="hv-brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v14"/></svg>
+          </div>
+          <div class="hv-brand-name">LIV-SENSI <span>AI</span></div>
+        </a>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <a href="evaluation.html" class="btn btn-primary btn-sm"><span class="desktop-only">Evaluation Suite</span><span class="mobile-only-inline">Evaluation</span> &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="hv-app-shell">
+    <!-- Mobile Drawer Backdrop -->
+    <div class="sidebar-backdrop"></div>
+    <!-- Sidebar -->
+    <aside class="hv-sidebar">
+      <div class="hv-sidebar-header">
+        <span class="hv-sidebar-title">Research Modules</span>
+        <button class="btn-close-sidebar-mobile" title="Close Menu">&times;</button>
+      </div>
+      <nav class="hv-sidebar-nav">
+        <a href="dashboard.html" data-tooltip="Research Dashboard" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📊</span>
+          <span>Research Dashboard</span>
+        </a>
+        <a href="analysis.html" data-tooltip="AI Image Workspace" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔬</span>
+          <span>AI Image Workspace</span>
+        </a>
+        <a href="literature.html" data-tooltip="Literature Review" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📚</span>
+          <span>Literature Review</span>
+        </a>
+        <a href="models.html" data-tooltip="Model Laboratory" class="hv-sidebar-item active">
+          <span class="hv-sidebar-icon">🧬</span>
+          <span>Model Laboratory</span>
+        </a>
+        <a href="datasets.html" data-tooltip="Dataset Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📁</span>
+          <span>Dataset Center</span>
+        </a>
+        <a href="evaluation.html" data-tooltip="Model Evaluation" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📈</span>
+          <span>Model Evaluation</span>
+        </a>
+        <a href="training.html" data-tooltip="Training Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">⚙️</span>
+          <span>Training Center</span>
+        </a>
+        <a href="explainability.html" data-tooltip="Explainable AI" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔍</span>
+          <span>Explainable AI</span>
+        </a>
+        <a href="reports.html" data-tooltip="Research Reports" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📄</span>
+          <span>Research Reports</span>
+        </a>
+      </nav>
+      <div style="padding: 1rem 1.25rem; border-top: 1px solid var(--color-border-subtle); font-size: 0.75rem;">
+        <a href="../index.html" style="color:var(--color-primary); font-weight:600;">&larr; Return to Landing</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="hv-main-content">
+        
+      <div style="margin-bottom: 2rem;">
+        <h2 class="page-title">Model Architecture Registry &amp; Laboratory</h2>
+        <p>Scientific breakdown of convolutional backbones, parameter scale, inductive biases, and training status.</p>
+      </div>
+
+      <!-- Models Grid -->
+      <div style="display:flex; flex-direction:column; gap:1.75rem;">
+        
+        <!-- 0. DenseNet-121 (Existing Project Baseline) -->
+        <div class="card" style="border: 2px solid var(--color-primary); background: #FAF6FA;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <h3 style="font-size:1.4rem; color:var(--color-primary);">DenseNet-121</h3>
+                <span class="badge badge-verified">Active Baseline (In Codebase)</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.25rem;">
+                Densely Connected Convolutional Network with 121 layers and custom 4-class hepatic classification head.
+              </p>
+            </div>
+            <div style="text-align:right;">
+              <span class="badge badge-verified">STATUS: IMPLEMENTED &amp; OPERATIONAL</span>
+              <div style="font-size:0.75rem; color:var(--color-text-muted); margin-top:0.25rem;">Hooked to Grad-CAM Layer</div>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; background:#fff; padding:1rem; border-radius:var(--radius-md); border:1px solid var(--color-border); font-size:0.82rem;">
+            <div><strong>Parameters:</strong> 7.0 Million</div>
+            <div><strong>Weights:</strong> RadImageNet / PyTorch Init</div>
+            <div><strong>Input Tensor:</strong> 3 x 224 x 224</div>
+            <div><strong>Target Modality:</strong> Ultrasound &amp; CT</div>
+          </div>
+        </div>
+
+        <!-- 1. VGG16 -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <h3 style="font-size:1.3rem;">1. VGG16 Architecture</h3>
+                <span class="badge badge-baseline">Baseline Feature Extractor</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.25rem;">
+                Homogeneous stack of 3x3 convolutional kernels across 5 pooling stages for spatial acoustic descriptor extraction.
+              </p>
+            </div>
+            <span class="badge badge-experimental">STATUS: IMPLEMENTED (STANDBY)</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; background:var(--color-surface); padding:1rem; border-radius:var(--radius-md); font-size:0.82rem;">
+            <div><strong>Parameters:</strong> 138.4 Million</div>
+            <div><strong>Training Status:</strong> Pre-trained ImageNet</div>
+            <div><strong>Evaluation:</strong> Validation Benchmark</div>
+            <div><strong>Dataset:</strong> Ultrasound NAFLD</div>
+          </div>
+        </div>
+
+        <!-- 2. VGG19 -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <h3 style="font-size:1.3rem;">2. VGG19 Architecture</h3>
+                <span class="badge badge-literature">Villanueva et al. (SPP 2021)</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.25rem;">
+                19-layer architecture with 16 convolutions evaluated by Villanueva et al. across 1,895 ultrasound images.
+              </p>
+            </div>
+            <span class="badge badge-literature">REPORTED: 86.7% ACCURACY</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; background:var(--color-surface); padding:1rem; border-radius:var(--radius-md); font-size:0.82rem;">
+            <div><strong>Parameters:</strong> 143.7 Million</div>
+            <div><strong>Training Status:</strong> Evaluated in Literature</div>
+            <div><strong>Reported Classes:</strong> 5 Disease Classes</div>
+            <div><strong>Dataset:</strong> 1,895 US Images</div>
+          </div>
+        </div>
+
+        <!-- 3. ResNet50V2 -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <h3 style="font-size:1.3rem;">3. ResNet50V2 Architecture</h3>
+                <span class="badge badge-experimental">Residual Pre-Activation</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.25rem;">
+                50-layer deep residual network with batch-norm and ReLU applied prior to convolutions, minimizing vanishing gradients.
+              </p>
+            </div>
+            <span class="badge badge-experimental">STATUS: IMPLEMENTED</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; background:var(--color-surface); padding:1rem; border-radius:var(--radius-md); font-size:0.82rem;">
+            <div><strong>Parameters:</strong> 25.6 Million</div>
+            <div><strong>Training Status:</strong> Standby / Pre-trained</div>
+            <div><strong>Evaluation:</strong> Standby</div>
+            <div><strong>Dataset:</strong> Ultrasound &amp; CT</div>
+          </div>
+        </div>
+
+        <!-- 4. DenseNet-201 -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <h3 style="font-size:1.3rem;">4. DenseNet-201 Architecture</h3>
+                <span class="badge badge-not-trained">Deep Feature Reuse</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.25rem;">
+                201-layer architecture connecting all previous layer feature maps to successor layers within each dense block.
+              </p>
+            </div>
+            <span class="badge badge-not-trained">STATUS: NOT TRAINED</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; background:var(--color-surface); padding:1rem; border-radius:var(--radius-md); font-size:0.82rem;">
+            <div><strong>Parameters:</strong> 20.0 Million</div>
+            <div><strong>Training Status:</strong> NOT TRAINED</div>
+            <div><strong>Evaluation:</strong> NOT AVAILABLE</div>
+            <div><strong>Dataset:</strong> Queued for Training</div>
+          </div>
+        </div>
+
+        <!-- 5. Inception-ResNet-v2 -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <h3 style="font-size:1.3rem;">5. Inception-ResNet-v2</h3>
+                <span class="badge badge-not-implemented">Multi-Scale Hybrid</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.25rem;">
+                Hybrid architecture combining multi-receptive field Inception modules with residual skip connections.
+              </p>
+            </div>
+            <span class="badge badge-not-implemented">STATUS: NOT IMPLEMENTED</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; background:var(--color-surface); padding:1rem; border-radius:var(--radius-md); font-size:0.82rem;">
+            <div><strong>Parameters:</strong> 55.8 Million</div>
+            <div><strong>Training Status:</strong> NOT IMPLEMENTED</div>
+            <div><strong>Evaluation:</strong> NOT AVAILABLE</div>
+            <div><strong>Dataset:</strong> Future Extension</div>
+          </div>
+        </div>
+
+        <!-- 6. Multi-Scale CNN -->
+        <div class="card" style="border-left: 4px solid var(--color-secondary);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <h3 style="font-size:1.3rem; color:var(--color-secondary);">6. Multi-Scale Residual CNN</h3>
+                <span class="badge badge-literature">PMID: 34097226</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.25rem;">
+                Multi-feature guided multi-scale residual CNN explicitly engineered for acoustic attenuation and fatty speckle variance.
+              </p>
+            </div>
+            <span class="badge badge-literature">LITERATURE: AUC 97.8% (LOOCV)</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; background:var(--color-surface); padding:1rem; border-radius:var(--radius-md); font-size:0.82rem;">
+            <div><strong>Parameters:</strong> Custom Multi-Kernel</div>
+            <div><strong>Training Status:</strong> Literature Validated</div>
+            <div><strong>Reported Accuracy:</strong> &gt; 90%</div>
+            <div><strong>Validation:</strong> Leave-One-Out (LOOCV)</div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/navigation.js"></script>
+  <!-- Mobile Native App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="../index.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="analysis.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🔬</span>
+      <span>Workspace</span>
+    </a>
+    <a href="literature.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📚</span>
+      <span>Literature</span>
+    </a>
+    <a href="reports.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📋</span>
+      <span>Reports</span>
+    </a>
+  </nav>
+
+</body>
+</html>

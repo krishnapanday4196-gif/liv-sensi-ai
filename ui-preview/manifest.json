@@ -1,0 +1,25 @@
+{
+  "name": "Liv-Sensi AI – Medical Diagnostic Platform",
+  "short_name": "Liv-Sensi",
+  "description": "Deep learning research and early detection platform for hepatic disease imaging",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#812D80",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/images/livsensi_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/livsensi_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["medical", "health", "education"]
+}

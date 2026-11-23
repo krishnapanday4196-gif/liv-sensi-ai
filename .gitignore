@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+ENV/
+
+# IDE & Tooling
+.gemini/
+.vscode/
+.idea/
+
+# Large Binaries
+cloudflared.exe
+*.exe
+
+# Local Data & Generated Artifacts
+liver_disease.db
+reports/report_*.pdf
+uploads/*.png
+uploads/*.jpg
+
+# Vercel & Node
+.vercel/
+node_modules/

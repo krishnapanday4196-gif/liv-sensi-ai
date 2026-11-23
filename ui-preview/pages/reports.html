@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#812D80">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Liv-Sensi">
+  <link rel="apple-touch-icon" href="../assets/images/apple_touch_icon.png">
+  <link rel="icon" type="image/png" href="../assets/images/livsensi_icon_192.png">
+  <title>Research Reports – Liv-Sensi</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="hv-navbar">
+    <div class="hv-navbar-container">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <button id="btn-toggle-sidebar" class="btn btn-ghost btn-sm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <a href="../index.html" class="hv-brand">
+          <div class="hv-brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v14"/></svg>
+          </div>
+          <div class="hv-brand-name">LIV-SENSI <span>AI</span></div>
+        </a>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <a href="dashboard.html" class="btn btn-secondary btn-sm">&larr; Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="hv-app-shell">
+    <!-- Mobile Drawer Backdrop -->
+    <div class="sidebar-backdrop"></div>
+    <!-- Sidebar -->
+    <aside class="hv-sidebar">
+      <div class="hv-sidebar-header">
+        <span class="hv-sidebar-title">Research Modules</span>
+        <button class="btn-close-sidebar-mobile" title="Close Menu">&times;</button>
+      </div>
+      <nav class="hv-sidebar-nav">
+        <a href="dashboard.html" data-tooltip="Research Dashboard" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📊</span>
+          <span>Research Dashboard</span>
+        </a>
+        <a href="analysis.html" data-tooltip="AI Image Workspace" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔬</span>
+          <span>AI Image Workspace</span>
+        </a>
+        <a href="literature.html" data-tooltip="Literature Review" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📚</span>
+          <span>Literature Review</span>
+        </a>
+        <a href="models.html" data-tooltip="Model Laboratory" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🧬</span>
+          <span>Model Laboratory</span>
+        </a>
+        <a href="datasets.html" data-tooltip="Dataset Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📁</span>
+          <span>Dataset Center</span>
+        </a>
+        <a href="evaluation.html" data-tooltip="Model Evaluation" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📈</span>
+          <span>Model Evaluation</span>
+        </a>
+        <a href="training.html" data-tooltip="Training Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">⚙️</span>
+          <span>Training Center</span>
+        </a>
+        <a href="explainability.html" data-tooltip="Explainable AI" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔍</span>
+          <span>Explainable AI</span>
+        </a>
+        <a href="reports.html" data-tooltip="Research Reports" class="hv-sidebar-item active">
+          <span class="hv-sidebar-icon">📄</span>
+          <span>Research Reports</span>
+        </a>
+      </nav>
+      <div style="padding: 1rem 1.25rem; border-top: 1px solid var(--color-border-subtle); font-size: 0.75rem;">
+        <a href="../index.html" style="color:var(--color-primary); font-weight:600;">&larr; Return to Landing</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="hv-main-content">
+        
+      <div style="margin-bottom: 2rem;">
+        <h2 class="page-title">Clinical &amp; Evaluation Report Library</h2>
+        <p>Comprehensive repository of generated clinical radiology dossiers, model evaluation summaries, and audit records.</p>
+      </div>
+
+      <!-- Report Library Table -->
+      <div class="card" style="margin-bottom:2rem;">
+        <div class="card-header">
+          <h3 class="card-title">Patient Diagnostic Evaluation Reports</h3>
+          <span class="badge badge-verified">SQLite Database Records</span>
+        </div>
+
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Accession #</th>
+                <th>Patient Name</th>
+                <th>Age / Sex</th>
+                <th>Modality</th>
+                <th>AI Diagnostic Finding</th>
+                <th>Risk Tier</th>
+                <th>Review Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="real-history-table-body">
+              <tr>
+                <td colspan="8" style="text-align:center; padding:1.5rem; color:var(--color-text-muted);">
+                  Loading live SQLite patient diagnostic records...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Research Literature Evaluation Dossiers -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Scientific Benchmark Summaries</h3>
+          <span class="badge badge-literature">Literature Evaluation</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.25rem;">
+          <div style="background:var(--color-surface); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--color-border);">
+            <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">TASK A SUMMARY</div>
+            <h4 style="margin:0.35rem 0;">Multi-Scale CNN NAFLD</h4>
+            <p style="font-size:0.8rem; margin-bottom:1rem;">Evaluation dossier on LOOCV validation over diffuse acoustic reflections (PMID: 34097226).</p>
+            <span class="badge badge-literature">Summary Ready</span>
+          </div>
+
+          <div style="background:var(--color-surface); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--color-border);">
+            <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">TASK B SUMMARY</div>
+            <h4 style="margin:0.35rem 0;">LiTS Benchmark CT Dossier</h4>
+            <p style="font-size:0.8rem; margin-bottom:1rem;">Liver and focal lesion Dice evaluation protocols over 201 contrast CT scans (Bilic et al.).</p>
+            <span class="badge badge-literature">Summary Ready</span>
+          </div>
+
+          <div style="background:var(--color-surface); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--color-border);">
+            <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">BASELINE DOSSIER</div>
+            <h4 style="margin:0.35rem 0;">DenseNet-121 Baseline</h4>
+            <p style="font-size:0.8rem; margin-bottom:1rem;">4-class classification evaluation with hook-based Grad-CAM heatmaps.</p>
+            <span class="badge badge-verified">Baseline Active</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- PDF Preview Modal -->
+  <div class="modal-overlay hidden" id="modal-report-preview">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4 style="color:var(--color-primary);">Clinical Report PDF Preview (PT-20261119-425C)</h4>
+        <button class="btn btn-ghost btn-sm btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body" style="background:#FAF6FA; text-align:center;">
+        <div style="background:#fff; border:1px solid var(--color-border); border-radius:var(--radius-md); padding:1.5rem; text-align:left; box-shadow:var(--shadow-sm);">
+          <div style="border-bottom:2px solid #812D80; padding-bottom:0.75rem; margin-bottom:1rem; display:flex; justify-content:space-between;">
+            <div>
+              <strong style="color:#812D80; font-size:1.1rem;">LIV-SENSI AI RADIOLOGY LABS</strong><br>
+              <span style="font-size:0.75rem; color:#77717A;">Advanced Deep Learning Liver Imaging | ISO 15189 Standard</span>
+            </div>
+            <span class="badge badge-verified">Verified Report</span>
+          </div>
+
+          <div style="font-size:0.82rem; margin-bottom:1rem; display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+            <div><strong>Patient Name:</strong> Meera Verma</div>
+            <div><strong>Accession #:</strong> PT-20261119-425C</div>
+            <div><strong>Age / Gender:</strong> 48 Yrs / Female</div>
+            <div><strong>Modality:</strong> Ultrasound (US)</div>
+          </div>
+
+          <div style="background:#F5EEF6; padding:0.75rem; border-radius:6px; margin-bottom:1rem; border:1px solid var(--color-border);">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#812D80; font-weight:700;">AI Primary Finding:</div>
+            <div style="font-size:1.05rem; font-weight:800; color:#29232D;">Fatty Liver (Hepatic Steatosis) &bull; 93.5% Confidence</div>
+            <span class="badge badge-experimental" style="margin-top:0.35rem;">Moderate Risk Tier</span>
+          </div>
+
+          <p style="font-size:0.78rem; color:#77717A; line-height:1.45;">
+            Diffusely elevated parenchymal acoustic echogenicity with deep acoustic beam attenuation. Portal venule delineation blunted, characteristic of Grade II Hepatic Steatosis.
+          </p>
+
+          <div style="border-top:1px solid #E8DEEB; margin-top:1rem; padding-top:0.75rem; display:flex; justify-content:space-between; font-size:0.75rem;">
+            <span>Reviewed by: Dr. Arvind Sharma, MD (Radiology)</span>
+            <span style="color:#2E7D32; font-weight:700;">&check; Electronically Signed</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <span style="font-size:0.75rem; color:var(--color-text-muted); margin-right:auto;">
+          Real ReportLab generator connects via <code>/api/report/{id}</code> during integration.
+        </span>
+        <button class="btn btn-secondary btn-sm btn-close-modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/navigation.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <!-- Mobile Native App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="../index.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="analysis.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🔬</span>
+      <span>Workspace</span>
+    </a>
+    <a href="literature.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📚</span>
+      <span>Literature</span>
+    </a>
+    <a href="reports.html" class="mobile-nav-tab active">
+      <span class="mobile-nav-icon">📋</span>
+      <span>Reports</span>
+    </a>
+  </nav>
+
+</body>
+</html>

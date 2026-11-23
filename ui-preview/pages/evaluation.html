@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#812D80">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Liv-Sensi">
+  <link rel="apple-touch-icon" href="../assets/images/apple_touch_icon.png">
+  <link rel="icon" type="image/png" href="../assets/images/livsensi_icon_192.png">
+  <title>Model Evaluation – Liv-Sensi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="hv-navbar">
+    <div class="hv-navbar-container">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <button id="btn-toggle-sidebar" class="btn btn-ghost btn-sm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <a href="../index.html" class="hv-brand">
+          <div class="hv-brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v14"/></svg>
+          </div>
+          <div class="hv-brand-name">LIV-SENSI <span>AI</span></div>
+        </a>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <a href="training.html" class="btn btn-primary btn-sm"><span class="desktop-only">Training Center</span><span class="mobile-only-inline">Training</span> &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="hv-app-shell">
+    <!-- Mobile Drawer Backdrop -->
+    <div class="sidebar-backdrop"></div>
+    <!-- Sidebar -->
+    <aside class="hv-sidebar">
+      <div class="hv-sidebar-header">
+        <span class="hv-sidebar-title">Research Modules</span>
+        <button class="btn-close-sidebar-mobile" title="Close Menu">&times;</button>
+      </div>
+      <nav class="hv-sidebar-nav">
+        <a href="dashboard.html" data-tooltip="Research Dashboard" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📊</span>
+          <span>Research Dashboard</span>
+        </a>
+        <a href="analysis.html" data-tooltip="AI Image Workspace" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔬</span>
+          <span>AI Image Workspace</span>
+        </a>
+        <a href="literature.html" data-tooltip="Literature Review" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📚</span>
+          <span>Literature Review</span>
+        </a>
+        <a href="models.html" data-tooltip="Model Laboratory" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🧬</span>
+          <span>Model Laboratory</span>
+        </a>
+        <a href="datasets.html" data-tooltip="Dataset Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📁</span>
+          <span>Dataset Center</span>
+        </a>
+        <a href="evaluation.html" data-tooltip="Model Evaluation" class="hv-sidebar-item active">
+          <span class="hv-sidebar-icon">📈</span>
+          <span>Model Evaluation</span>
+        </a>
+        <a href="training.html" data-tooltip="Training Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">⚙️</span>
+          <span>Training Center</span>
+        </a>
+        <a href="explainability.html" data-tooltip="Explainable AI" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔍</span>
+          <span>Explainable AI</span>
+        </a>
+        <a href="reports.html" data-tooltip="Research Reports" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📄</span>
+          <span>Research Reports</span>
+        </a>
+      </nav>
+      <div style="padding: 1rem 1.25rem; border-top: 1px solid var(--color-border-subtle); font-size: 0.75rem;">
+        <a href="../index.html" style="color:var(--color-primary); font-weight:600;">&larr; Return to Landing</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="hv-main-content">
+        
+      <div style="margin-bottom: 2rem;">
+        <h2 class="page-title">Empirical Performance Evaluation</h2>
+        <p>Receiver Operating Characteristic (ROC) analysis, confusion matrix, and volumetric segmentation Dice scores.</p>
+      </div>
+
+      <!-- Task Tabs -->
+      <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem;">
+        <button class="btn btn-secondary btn-sm active" data-tab-group="eval-tasks" data-tab-target="tab-task-a">
+          Task A: Ultrasound Classification (ROC &amp; Confusion Matrix)
+        </button>
+        <button class="btn btn-secondary btn-sm" data-tab-group="eval-tasks" data-tab-target="tab-task-b">
+          Task B: CT Segmentation (Dice &amp; IoU Analysis)
+        </button>
+      </div>
+
+      <!-- Tab Content: Task A -->
+      <div id="tab-task-a" data-tab-content="eval-tasks">
+        <div style="display:grid; grid-template-columns: 1.35fr 1fr; gap:1.75rem; margin-bottom:2rem;">
+          
+          <!-- ROC Curves Chart Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Multi-Model ROC Curves</h3>
+                <span class="card-subtitle">Sensitivity vs 1 - Specificity across threshold sweeps</span>
+              </div>
+              <span class="badge badge-literature">Task A Benchmark</span>
+            </div>
+            <div style="height: 340px; position: relative;">
+              <canvas id="roc-chart-canvas"></canvas>
+            </div>
+            <div style="margin-top:0.75rem; font-size:0.75rem; color:var(--color-text-muted);">
+              <strong>Literature Note:</strong> Multi-scale CNN reported AUC 0.978 (PMID: 34097226). Byra et al. reported AUC 0.90 for fatty liver on best ultrasound view.
+            </div>
+          </div>
+
+          <!-- Confusion Matrix Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Confusion Matrix</h3>
+                <span class="card-subtitle">4-Class Normalized (%)</span>
+              </div>
+              <span class="badge badge-baseline">Baseline Model</span>
+            </div>
+
+            <!-- Normalized Matrix Visual -->
+            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align:center; font-size:0.75rem; margin:1.25rem 0;">
+              <!-- Row 1: Normal -->
+              <div style="background:#812D80; color:#fff; padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>97.2%</strong><br><span style="font-size:0.65rem;">Normal</span>
+              </div>
+              <div style="background:#F5EEF6; color:var(--color-text); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>1.8%</strong><br><span style="font-size:0.65rem;">Steat.</span>
+              </div>
+              <div style="background:#FAF6FA; color:var(--color-text-dim); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>0.6%</strong><br><span style="font-size:0.65rem;">Cirrh.</span>
+              </div>
+              <div style="background:#FAF6FA; color:var(--color-text-dim); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>0.4%</strong><br><span style="font-size:0.65rem;">Tumor</span>
+              </div>
+
+              <!-- Row 2: Steatosis -->
+              <div style="background:#F5EEF6; color:var(--color-text); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>2.1%</strong><br><span style="font-size:0.65rem;">Normal</span>
+              </div>
+              <div style="background:#812D80; color:#fff; padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>95.4%</strong><br><span style="font-size:0.65rem;">Steat.</span>
+              </div>
+              <div style="background:#FAF6FA; color:var(--color-text-dim); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>1.5%</strong><br><span style="font-size:0.65rem;">Cirrh.</span>
+              </div>
+              <div style="background:#FAF6FA; color:var(--color-text-dim); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>1.0%</strong><br><span style="font-size:0.65rem;">Tumor</span>
+              </div>
+
+              <!-- Row 3: Cirrhosis -->
+              <div style="background:#FAF6FA; color:var(--color-text-dim); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>0.8%</strong><br><span style="font-size:0.65rem;">Normal</span>
+              </div>
+              <div style="background:#F5EEF6; color:var(--color-text); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>2.0%</strong><br><span style="font-size:0.65rem;">Steat.</span>
+              </div>
+              <div style="background:#E52591; color:#fff; padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>94.8%</strong><br><span style="font-size:0.65rem;">Cirrh.</span>
+              </div>
+              <div style="background:#F5EEF6; color:var(--color-text); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>2.4%</strong><br><span style="font-size:0.65rem;">Tumor</span>
+              </div>
+
+              <!-- Row 4: Tumor -->
+              <div style="background:#FAF6FA; color:var(--color-text-dim); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>0.3%</strong><br><span style="font-size:0.65rem;">Normal</span>
+              </div>
+              <div style="background:#FAF6FA; color:var(--color-text-dim); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>0.9%</strong><br><span style="font-size:0.65rem;">Steat.</span>
+              </div>
+              <div style="background:#F5EEF6; color:var(--color-text); padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>1.9%</strong><br><span style="font-size:0.65rem;">Cirrh.</span>
+              </div>
+              <div style="background:#E52591; color:#fff; padding:1.2rem 0.5rem; border-radius:6px;">
+                <strong>96.9%</strong><br><span style="font-size:0.65rem;">Tumor</span>
+              </div>
+            </div>
+
+            <div style="font-size:0.75rem; color:var(--color-text-muted); text-align:center;">
+              Overall Balanced F1-Score: <strong>0.958</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture Accuracy Comparison Chart Card -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Architecture Accuracy Benchmark Comparison</h3>
+              <span class="card-subtitle">Verified published figures vs. legacy baseline</span>
+            </div>
+            <span class="badge badge-literature">Literature vs Baseline</span>
+          </div>
+          <div style="height: 280px; position: relative;">
+            <canvas id="arch-comp-chart-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Task B -->
+      <div id="tab-task-b" data-tab-content="eval-tasks" class="hidden">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Task B: CT Volumetric Segmentation Benchmarks (LiTS)</h3>
+              <span class="card-subtitle">Bilic et al. Standardized Evaluation on 201 Contrast-Enhanced CT Volumes</span>
+            </div>
+            <span class="badge badge-experimental">Task B LiTS</span>
+          </div>
+          
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:center;">
+            <div style="height: 280px; position:relative;">
+              <canvas id="dice-chart-canvas"></canvas>
+            </div>
+            <div>
+              <div style="background:var(--color-surface); padding:1.5rem; border-radius:var(--radius-lg); border:1px solid var(--color-border);">
+                <h4 style="margin-bottom:0.5rem;">LiTS Benchmark Literature Statistics</h4>
+                <p style="font-size:0.85rem; margin-bottom:1rem;">
+                  Published results from 75 international algorithms on 131 training and 70 blind test CT volumes:
+                </p>
+                <div style="display:flex; flex-direction:column; gap:0.65rem; font-size:0.85rem;">
+                  <div style="display:flex; justify-content:space-between;">
+                    <span>Liver Parenchyma Dice:</span>
+                    <strong style="color:var(--color-primary);">0.963</strong>
+                  </div>
+                  <div style="display:flex; justify-content:space-between;">
+                    <span>Focal Hepatic Lesions / Tumor Dice:</span>
+                    <strong style="color:var(--color-secondary);">0.739</strong>
+                  </div>
+                  <div style="display:flex; justify-content:space-between;">
+                    <span>Mean Surface Distance (MSD):</span>
+                    <strong>1.12 mm</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/charts.js"></script>
+  <script src="../assets/js/navigation.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.HepatoCharts) {
+        window.HepatoCharts.createROCChart('roc-chart-canvas');
+        window.HepatoCharts.createArchitectureComparisonChart('arch-comp-chart-canvas');
+        window.HepatoCharts.createSegmentationDiceChart('dice-chart-canvas');
+      }
+    });
+  </script>
+  <!-- Mobile Native App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="../index.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="analysis.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🔬</span>
+      <span>Workspace</span>
+    </a>
+    <a href="literature.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📚</span>
+      <span>Literature</span>
+    </a>
+    <a href="reports.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📋</span>
+      <span>Reports</span>
+    </a>
+  </nav>
+
+</body>
+</html>

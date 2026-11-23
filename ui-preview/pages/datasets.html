@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#812D80">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Liv-Sensi">
+  <link rel="apple-touch-icon" href="../assets/images/apple_touch_icon.png">
+  <link rel="icon" type="image/png" href="../assets/images/livsensi_icon_192.png">
+  <title>Dataset Center – Liv-Sensi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="hv-navbar">
+    <div class="hv-navbar-container">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <button id="btn-toggle-sidebar" class="btn btn-ghost btn-sm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <a href="../index.html" class="hv-brand">
+          <div class="hv-brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v14"/></svg>
+          </div>
+          <div class="hv-brand-name">LIV-SENSI <span>AI</span></div>
+        </a>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <a href="evaluation.html" class="btn btn-primary btn-sm">Evaluation &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="hv-app-shell">
+    <!-- Mobile Drawer Backdrop -->
+    <div class="sidebar-backdrop"></div>
+    <!-- Sidebar -->
+    <aside class="hv-sidebar">
+      <div class="hv-sidebar-header">
+        <span class="hv-sidebar-title">Research Modules</span>
+        <button class="btn-close-sidebar-mobile" title="Close Menu">&times;</button>
+      </div>
+      <nav class="hv-sidebar-nav">
+        <a href="dashboard.html" data-tooltip="Research Dashboard" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📊</span>
+          <span>Research Dashboard</span>
+        </a>
+        <a href="analysis.html" data-tooltip="AI Image Workspace" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔬</span>
+          <span>AI Image Workspace</span>
+        </a>
+        <a href="literature.html" data-tooltip="Literature Review" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📚</span>
+          <span>Literature Review</span>
+        </a>
+        <a href="models.html" data-tooltip="Model Laboratory" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🧬</span>
+          <span>Model Laboratory</span>
+        </a>
+        <a href="datasets.html" data-tooltip="Dataset Center" class="hv-sidebar-item active">
+          <span class="hv-sidebar-icon">📁</span>
+          <span>Dataset Center</span>
+        </a>
+        <a href="evaluation.html" data-tooltip="Model Evaluation" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📈</span>
+          <span>Model Evaluation</span>
+        </a>
+        <a href="training.html" data-tooltip="Training Center" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">⚙️</span>
+          <span>Training Center</span>
+        </a>
+        <a href="explainability.html" data-tooltip="Explainable AI" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">🔍</span>
+          <span>Explainable AI</span>
+        </a>
+        <a href="reports.html" data-tooltip="Research Reports" class="hv-sidebar-item">
+          <span class="hv-sidebar-icon">📄</span>
+          <span>Research Reports</span>
+        </a>
+      </nav>
+      <div style="padding: 1rem 1.25rem; border-top: 1px solid var(--color-border-subtle); font-size: 0.75rem;">
+        <a href="../index.html" style="color:var(--color-primary); font-weight:600;">&larr; Return to Landing</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="hv-main-content">
+        
+      <div style="margin-bottom: 2rem;">
+        <h2 class="page-title">Hepatic Imaging Datasets &amp; Cohorts</h2>
+        <p>Comprehensive overview of clinical ultrasound acoustic cohorts and abdominal CT volumetric benchmarks.</p>
+      </div>
+
+      <!-- Dataset Modality Cards -->
+      <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; margin-bottom: 2rem;">
+        
+        <!-- Dataset 1: Ultrasound Cohorts -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <span class="badge badge-literature" style="margin-bottom:0.35rem;">TASK A MODALITY</span>
+              <h3 class="card-title">Hepatic Ultrasound Cohorts</h3>
+            </div>
+            <span class="badge badge-verified">B-Mode Acoustic</span>
+          </div>
+
+          <p style="font-size:0.85rem; margin-bottom:1rem;">
+            Acoustic reflection datasets capturing parenchymal speckle patterns, attenuation profiles, and portal venule echogenicity.
+          </p>
+
+          <div class="data-table-wrapper" style="margin-bottom:1rem;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Cohort Source</th>
+                  <th>Sample Size</th>
+                  <th>Reference Standard</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Byra et al. (JUM 2021)</strong></td>
+                  <td>135 Individuals (4 Views)</td>
+                  <td>MRI-PDFF Calibrated</td>
+                </tr>
+                <tr>
+                  <td><strong>Villanueva et al. (2021)</strong></td>
+                  <td>1,895 B-Mode Scans</td>
+                  <td>Histopathology &amp; LFT</td>
+                </tr>
+                <tr>
+                  <td><strong>Synthetic US Benchmarks</strong></td>
+                  <td>4 Calibrated Scans</td>
+                  <td>In-Repository Demonstration</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background:var(--color-surface); padding:0.85rem; border-radius:var(--radius-md); font-size:0.8rem;">
+            <strong>Patient Split Strategy:</strong> Strict 70% Train, 15% Validation, 15% Test partitioned strictly on Patient ID to prevent same-patient slice leakage across folds.
+          </div>
+        </div>
+
+        <!-- Dataset 2: CT Volumetric Benchmark (LiTS) -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <span class="badge badge-experimental" style="margin-bottom:0.35rem;">TASK B MODALITY</span>
+              <h3 class="card-title">LiTS (Liver Tumor Segmentation)</h3>
+            </div>
+            <span class="badge badge-literature">MICCAI Benchmark</span>
+          </div>
+
+          <p style="font-size:0.85rem; margin-bottom:1rem;">
+            Contrast-enhanced abdominal CT scans from multiple clinical centers representing high variability in scanner vendors, slice thickness, and pathology stages.
+          </p>
+
+          <div class="data-table-wrapper" style="margin-bottom:1rem;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Partition</th>
+                  <th>Volumes</th>
+                  <th>Annotations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Training Cohort</strong></td>
+                  <td>131 CT Scans</td>
+                  <td>Expert Voxel Masks (Liver &amp; Lesions)</td>
+                </tr>
+                <tr>
+                  <td><strong>Test Cohort</strong></td>
+                  <td>70 CT Scans</td>
+                  <td>Blind Benchmark Evaluation</td>
+                </tr>
+                <tr>
+                  <td><strong>Total Scans</strong></td>
+                  <td>201 Scans</td>
+                  <td>Bilic et al. Standardized Protocol</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background:var(--color-surface); padding:0.85rem; border-radius:var(--radius-md); font-size:0.8rem;">
+            <strong>Licensing &amp; Provenance:</strong> Distributed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Class Distribution & Split Protocol -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Class Distribution &amp; Target Classes</h3>
+          <span class="badge badge-baseline">Scientific Rigor</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1.25rem;">
+          <div style="background:var(--color-surface); padding:1.25rem; border-radius:var(--radius-md); border-top:3px solid #2E7D32;">
+            <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">CLASS 1: NORMAL</div>
+            <div style="font-size:1.1rem; font-weight:700; margin:0.35rem 0;">Healthy Parenchyma</div>
+            <p style="font-size:0.78rem;">Smooth margins, normal portal vascularity, absence of beam attenuation.</p>
+          </div>
+
+          <div style="background:var(--color-surface); padding:1.25rem; border-radius:var(--radius-md); border-top:3px solid #B76E00;">
+            <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">CLASS 2: STEATOSIS</div>
+            <div style="font-size:1.1rem; font-weight:700; margin:0.35rem 0;">Fatty Liver (NAFLD)</div>
+            <p style="font-size:0.78rem;">Diffusely increased acoustic echogenicity with deep acoustic beam attenuation.</p>
+          </div>
+
+          <div style="background:var(--color-surface); padding:1.25rem; border-radius:var(--radius-md); border-top:3px solid #812D80;">
+            <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">CLASS 3: CIRRHOSIS</div>
+            <div style="font-size:1.1rem; font-weight:700; margin:0.35rem 0;">Chronic Fibrosis</div>
+            <p style="font-size:0.78rem;">Coarse heterogeneous parenchymal texture and irregular nodular surface.</p>
+          </div>
+
+          <div style="background:var(--color-surface); padding:1.25rem; border-radius:var(--radius-md); border-top:3px solid #E52591;">
+            <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">CLASS 4: TUMOR / HCC</div>
+            <div style="font-size:1.1rem; font-weight:700; margin:0.35rem 0;">Focal Neoplasm</div>
+            <p style="font-size:0.78rem;">Focal mass with peripheral hypervascularity and heterogeneous internal necrotic core.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/navigation.js"></script>
+  <!-- Mobile Native App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="../index.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="analysis.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">🔬</span>
+      <span>Workspace</span>
+    </a>
+    <a href="literature.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📚</span>
+      <span>Literature</span>
+    </a>
+    <a href="reports.html" class="mobile-nav-tab">
+      <span class="mobile-nav-icon">📋</span>
+      <span>Reports</span>
+    </a>
+  </nav>
+
+</body>
+</html>
