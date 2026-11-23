@@ -479,10 +479,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const patientId = patientIdInput?.value || 'PT-2026-9041';
-    const patientName = patientNameInput?.value || 'Suresh Patel';
-    const age = patientAgeInput?.value || '45';
-    const gender = patientGenderInput?.value || 'Male';
+    const patientId = data.patientId || patientIdInput?.value || 'PT-2026-9041';
+    const patientName = data.patientName || patientNameInput?.value || 'Suresh Patel';
+    const age = data.age || patientAgeInput?.value || '45';
+    const gender = data.gender || patientGenderInput?.value || 'Male';
     const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
     printWindow.document.write(`
@@ -613,32 +613,172 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 12. Session Patient History Tracker
+  // 12. Session Patient History Tracker & Persistence
   function saveSessionRecord(data) {
+    const patientId = data.patientId || patientIdInput?.value || 'PT-2026-9041';
+    const patientName = data.patientName || patientNameInput?.value || 'Suresh Patel';
+    const age = data.age || patientAgeInput?.value || '45';
+    const gender = data.gender || patientGenderInput?.value || 'Male';
+
+    const record = {
+      patientId,
+      patientName,
+      age,
+      gender,
+      modality: 'Ultrasound (US)',
+      predicted_class: data.predicted_class,
+      confidence: data.confidence,
+      risk_level: data.risk_level,
+      badge_color: data.badge_color || '#812D80',
+      findings: data.findings || 'Acoustic parenchymal reflection analysis and Grad-CAM attention localization completed.'
+    };
+
+    try {
+      const history = JSON.parse(localStorage.getItem('livsensi_patient_history') || '[]');
+      history.unshift(record);
+      localStorage.setItem('livsensi_patient_history', JSON.stringify(history.slice(0, 30)));
+    } catch (e) {}
+
     const tableBody = document.getElementById('real-history-table-body');
     if (!tableBody) return;
+    renderTableRow(record, tableBody, true);
+  }
 
-    const patientId = patientIdInput?.value || 'PT-2026-9041';
-    const patientName = patientNameInput?.value || 'Suresh Patel';
-    const age = patientAgeInput?.value || '45';
-    const gender = patientGenderInput?.value || 'Male';
-
+  function renderTableRow(record, tableBody, prepend = false) {
+    const table = tableBody.closest('table');
+    const isReportsTable = table && table.querySelectorAll('th').length >= 8;
     const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><strong>${escapeHtml(patientId)}</strong></td>
-      <td>${escapeHtml(patientName)}</td>
-      <td>${escapeHtml(age)} / ${escapeHtml(gender[0] || 'M')}</td>
-      <td>Ultrasound / CT</td>
-      <td><strong style="color:var(--color-primary);">${escapeHtml(data.predicted_class)}</strong> (${escapeHtml(data.confidence)}%)</td>
-      <td><span class="badge" style="background:${data.badge_color}; color:#fff;">${escapeHtml(data.risk_level)}</span></td>
-      <td><span class="badge badge-verified">Verified AI</span></td>
-      <td>
-        <button type="button" class="btn btn-secondary btn-sm" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="window.print()">
-          Print Report
-        </button>
-      </td>
-    `;
-    tableBody.insertBefore(tr, tableBody.firstChild);
+
+    if (isReportsTable) {
+      tr.innerHTML = `
+        <td><strong>${escapeHtml(record.patientId)}</strong></td>
+        <td>${escapeHtml(record.patientName)}</td>
+        <td>${escapeHtml(record.age)} / ${escapeHtml(record.gender ? record.gender[0] : 'M')}</td>
+        <td>${escapeHtml(record.modality || 'Ultrasound (US)')}</td>
+        <td><strong style="color:var(--color-primary);">${escapeHtml(record.predicted_class)}</strong> (${escapeHtml(record.confidence)}%)</td>
+        <td><span class="badge" style="background:${record.badge_color || '#812D80'}; color:#fff;">${escapeHtml(record.risk_level)}</span></td>
+        <td><span class="badge badge-verified">&check; Live AI</span></td>
+        <td>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary btn-sm btn-open-modal-dossier" 
+              data-patient="${escapeHtml(record.patientName)}" 
+              data-id="${escapeHtml(record.patientId)}" 
+              data-age="${escapeHtml(record.age)} / ${escapeHtml(record.gender)}" 
+              data-mod="${escapeHtml(record.modality || 'Ultrasound (US)')}" 
+              data-diag="${escapeHtml(record.predicted_class)} &bull; ${escapeHtml(record.confidence)}%" 
+              data-risk="${escapeHtml(record.risk_level)}" 
+              data-findings="${escapeHtml(record.findings || '')}">View Dossier</button>
+            <button type="button" class="btn btn-primary btn-sm btn-quick-print" 
+              data-patient="${escapeHtml(record.patientName)}" 
+              data-id="${escapeHtml(record.patientId)}" 
+              data-age="${escapeHtml(record.age)}" 
+              data-gender="${escapeHtml(record.gender)}" 
+              data-diag="${escapeHtml(record.predicted_class)}" 
+              data-conf="${escapeHtml(record.confidence)}" 
+              data-risk="${escapeHtml(record.risk_level)}" 
+              data-color="${escapeHtml(record.badge_color || '#812D80')}" 
+              data-findings="${escapeHtml(record.findings || '')}">Print / PDF</button>
+          </div>
+        </td>
+      `;
+    } else {
+      tr.innerHTML = `
+        <td><strong>${escapeHtml(record.patientId)}</strong></td>
+        <td>${escapeHtml(record.predicted_class)}</td>
+        <td><strong style="color:${record.badge_color || 'var(--color-primary)'};">${escapeHtml(record.confidence)}%</strong></td>
+      `;
+    }
+
+    if (prepend && tableBody.firstChild) {
+      tableBody.insertBefore(tr, tableBody.firstChild);
+    } else {
+      tableBody.appendChild(tr);
+    }
+  }
+
+  function initPatientReports() {
+    const tableBody = document.getElementById('real-history-table-body');
+    if (tableBody) {
+      // Prepend any stored patient analyses from localStorage
+      try {
+        const history = JSON.parse(localStorage.getItem('livsensi_patient_history') || '[]');
+        history.reverse().forEach(record => {
+          renderTableRow(record, tableBody, true);
+        });
+      } catch (e) {}
+    }
+
+    // Modal Dossier preview handler
+    document.addEventListener('click', (e) => {
+      const viewBtn = e.target.closest('.btn-open-modal-dossier');
+      if (viewBtn) {
+        e.preventDefault();
+        const pName = viewBtn.getAttribute('data-patient') || 'Meera Verma';
+        const pId = viewBtn.getAttribute('data-id') || 'PT-20261119-425C';
+        const pAge = viewBtn.getAttribute('data-age') || '48 / Female';
+        const pMod = viewBtn.getAttribute('data-mod') || 'Ultrasound (US)';
+        const pDiag = viewBtn.getAttribute('data-diag') || 'Fatty Liver (Hepatic Steatosis)';
+        const pRisk = viewBtn.getAttribute('data-risk') || 'Moderate Risk Tier';
+        const pFindings = viewBtn.getAttribute('data-findings') || 'Parenchymal inspection completed.';
+
+        const titleEl = document.getElementById('modal-report-title');
+        const nameEl = document.getElementById('modal-patient-name');
+        const idEl = document.getElementById('modal-accession-no');
+        const ageEl = document.getElementById('modal-age-gender');
+        const modEl = document.getElementById('modal-modality');
+        const diagEl = document.getElementById('modal-ai-finding');
+        const riskEl = document.getElementById('modal-risk-tier');
+        const findEl = document.getElementById('modal-findings-text');
+
+        if (titleEl) titleEl.textContent = `Clinical Report PDF Preview (${pId})`;
+        if (nameEl) nameEl.textContent = pName;
+        if (idEl) idEl.textContent = pId;
+        if (ageEl) ageEl.textContent = pAge;
+        if (modEl) modEl.textContent = pMod;
+        if (diagEl) diagEl.innerHTML = pDiag;
+        if (riskEl) riskEl.textContent = pRisk;
+        if (findEl) findEl.textContent = pFindings;
+
+        const modal = document.getElementById('modal-report-preview');
+        if (modal) modal.classList.remove('hidden');
+
+        const modalPrintBtn = document.getElementById('btn-modal-print-report');
+        if (modalPrintBtn) {
+          modalPrintBtn.onclick = () => {
+            const ageVal = pAge.split('/')[0] ? pAge.split('/')[0].replace(/\D/g, '').trim() : '48';
+            const genderVal = pAge.split('/')[1] ? pAge.split('/')[1].trim() : 'Female';
+            printClinicalReport({
+              patientId: pId,
+              patientName: pName,
+              age: ageVal,
+              gender: genderVal,
+              predicted_class: pDiag.split('&bull;')[0].split('•')[0].trim(),
+              confidence: pDiag.includes('%') ? (pDiag.match(/(\d+\.?\d*)\s*%/)?.[1] || '94.0') : '94.0',
+              risk_level: pRisk,
+              badge_color: '#812D80',
+              findings: pFindings
+            });
+          };
+        }
+      }
+
+      // Quick print / download PDF handler from row
+      const printBtn = e.target.closest('.btn-quick-print');
+      if (printBtn) {
+        e.preventDefault();
+        printClinicalReport({
+          patientId: printBtn.getAttribute('data-id') || 'PT-2026-9041',
+          patientName: printBtn.getAttribute('data-patient') || 'Suresh Patel',
+          age: printBtn.getAttribute('data-age') || '45',
+          gender: printBtn.getAttribute('data-gender') || 'Male',
+          predicted_class: printBtn.getAttribute('data-diag') || 'Normal Liver',
+          confidence: printBtn.getAttribute('data-conf') || '98.4',
+          risk_level: printBtn.getAttribute('data-risk') || 'Low Risk',
+          badge_color: printBtn.getAttribute('data-color') || '#2E7D32',
+          findings: printBtn.getAttribute('data-findings') || 'Clinical review completed.'
+        });
+      }
+    });
   }
 
   function escapeHtml(unsafe) {
@@ -650,6 +790,9 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
   }
+
+  // Initialize report handlers on any page with reports
+  initPatientReports();
 
   // Initial state on page load - STANDBY until user clicks "Run Real"
   if (document.getElementById('btn-run-analysis')) {

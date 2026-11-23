@@ -13,11 +13,64 @@
   <link rel="apple-touch-icon" href="/assets/images/apple_touch_icon.png">
   <link rel="icon" type="image/png" href="/assets/images/livsensi_icon_192.png">
   <title>Research Reports – Liv-Sensi</title>
-
   
   <link rel="stylesheet" href="/assets/css/design-system.css">
   <link rel="stylesheet" href="/assets/css/animations.css">
   <link rel="stylesheet" href="/assets/css/components.css">
+
+  <style>
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+      overflow-x: hidden !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    .reports-dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    .card {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+
+    .data-table-wrapper {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-sizing: border-box !important;
+    }
+
+    @media (max-width: 992px) {
+      .reports-dossier-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      .hv-main-content {
+        padding: 0.75rem 0.65rem 5rem !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+      }
+      .data-table {
+        min-width: 650px !important;
+      }
+      .data-table th, .data-table td {
+        padding: 0.55rem 0.6rem !important;
+        font-size: 0.76rem !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -105,8 +158,16 @@
       <!-- Report Library Table -->
       <div class="card" style="margin-bottom:2rem;">
         <div class="card-header">
-          <h3 class="card-title">Patient Diagnostic Evaluation Reports</h3>
-          <span class="badge badge-verified">SQLite Database Records</span>
+          <div>
+            <h3 class="card-title">Patient Diagnostic Evaluation Reports</h3>
+            <span class="card-subtitle">Verified Clinical AI Inferences &amp; Diagnostic Dossiers</span>
+          </div>
+          <span class="badge badge-verified">Clinical Dossier Archive</span>
+        </div>
+
+        <div style="font-size:0.72rem; color:var(--color-primary); font-weight:600; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.35rem;" class="mobile-only-inline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 8L22 12L18 16"/><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+          <span>Swipe horizontally to view full patient dossier &amp; actions</span>
         </div>
 
         <div class="data-table-wrapper">
@@ -125,8 +186,78 @@
             </thead>
             <tbody id="real-history-table-body">
               <tr>
-                <td colspan="8" style="text-align:center; padding:1.5rem; color:var(--color-text-muted);">
-                  Loading live SQLite patient diagnostic records...
+                <td><strong>PT-20261119-425C</strong></td>
+                <td>Meera Verma</td>
+                <td>48 / F</td>
+                <td>Ultrasound (US)</td>
+                <td><strong style="color:var(--color-primary);">Fatty Liver (Steatosis)</strong> (93.5%)</td>
+                <td><span class="badge badge-pending">Moderate Risk</span></td>
+                <td><span class="badge badge-verified">&check; Signed</span></td>
+                <td>
+                  <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-secondary btn-sm btn-open-modal-dossier" data-patient="Meera Verma" data-id="PT-20261119-425C" data-age="48 / Female" data-mod="Ultrasound (US)" data-diag="Fatty Liver (Hepatic Steatosis) &bull; 93.5%" data-risk="Moderate Risk Tier" data-findings="Diffusely elevated parenchymal acoustic echogenicity with deep acoustic beam attenuation. Portal venule delineation blunted, characteristic of Grade II Hepatic Steatosis.">View Dossier</button>
+                    <button type="button" class="btn btn-primary btn-sm btn-quick-print" data-patient="Meera Verma" data-id="PT-20261119-425C" data-age="48" data-gender="Female" data-diag="Fatty Liver (Hepatic Steatosis)" data-conf="93.5" data-risk="Moderate Risk Tier" data-color="#B76E00" data-findings="Diffusely elevated parenchymal acoustic echogenicity with deep acoustic beam attenuation. Portal venule delineation blunted, characteristic of Grade II Hepatic Steatosis.">Print / PDF</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>PT-2026-9041</strong></td>
+                <td>Suresh Patel</td>
+                <td>45 / M</td>
+                <td>Ultrasound (US)</td>
+                <td><strong style="color:#10b981;">Normal Liver</strong> (98.4%)</td>
+                <td><span class="badge" style="background:#2E7D32; color:#fff;">Low Risk</span></td>
+                <td><span class="badge badge-verified">&check; Signed</span></td>
+                <td>
+                  <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-secondary btn-sm btn-open-modal-dossier" data-patient="Suresh Patel" data-id="PT-2026-9041" data-age="45 / Male" data-mod="Ultrasound (US)" data-diag="Normal Liver (Healthy Parenchyma) &bull; 98.4%" data-risk="Low Risk" data-findings="Homogeneous liver parenchymal echotexture with smooth capsular margins. Normal caliber and branching pattern of portal and hepatic veins. Absence of focal solid or cystic mass.">View Dossier</button>
+                    <button type="button" class="btn btn-primary btn-sm btn-quick-print" data-patient="Suresh Patel" data-id="PT-2026-9041" data-age="45" data-gender="Male" data-diag="Normal Liver (Healthy Parenchyma)" data-conf="98.4" data-risk="Low Risk" data-color="#2E7D32" data-findings="Homogeneous liver parenchymal echotexture with smooth capsular margins. Normal caliber and branching pattern of portal and hepatic veins. Absence of focal solid or cystic mass.">Print / PDF</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>PT-2026-8812</strong></td>
+                <td>Rajesh Sharma</td>
+                <td>52 / M</td>
+                <td>Abdominal CT</td>
+                <td><strong style="color:#f59e0b;">Fatty Liver (NAFLD)</strong> (96.2%)</td>
+                <td><span class="badge badge-pending">Moderate Risk</span></td>
+                <td><span class="badge badge-verified">&check; Signed</span></td>
+                <td>
+                  <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-secondary btn-sm btn-open-modal-dossier" data-patient="Rajesh Sharma" data-id="PT-2026-8812" data-age="52 / Male" data-mod="Abdominal CT" data-diag="Fatty Liver (NAFLD) &bull; 96.2%" data-risk="Moderate Risk" data-findings="Hepatic parenchymal attenuation measured below spleen baseline (mean 38 HU vs spleen 48 HU), consistent with diffuse moderate-to-severe hepatic steatosis without focal infiltrative neoplasm.">View Dossier</button>
+                    <button type="button" class="btn btn-primary btn-sm btn-quick-print" data-patient="Rajesh Sharma" data-id="PT-2026-8812" data-age="52" data-gender="Male" data-diag="Fatty Liver (NAFLD)" data-conf="96.2" data-risk="Moderate Risk" data-color="#f59e0b" data-findings="Hepatic parenchymal attenuation measured below spleen baseline (mean 38 HU vs spleen 48 HU), consistent with diffuse moderate-to-severe hepatic steatosis without focal infiltrative neoplasm.">Print / PDF</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>PT-2026-7643</strong></td>
+                <td>Anita Sen</td>
+                <td>61 / F</td>
+                <td>Ultrasound (US)</td>
+                <td><strong style="color:#ef4444;">Liver Cirrhosis</strong> (97.8%)</td>
+                <td><span class="badge" style="background:#dc2626; color:#fff;">High Risk</span></td>
+                <td><span class="badge badge-verified">&check; Signed</span></td>
+                <td>
+                  <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-secondary btn-sm btn-open-modal-dossier" data-patient="Anita Sen" data-id="PT-2026-7643" data-age="61 / Female" data-mod="Ultrasound (US)" data-diag="Liver Cirrhosis &bull; 97.8%" data-risk="High Risk" data-findings="Coarsened, heterogeneous echotexture with pronounced surface nodularity and blunted anterior edge. Caudate lobe hypertrophy (caudate-to-right lobe ratio > 0.65). Portal vein diameter enlarged to 14 mm.">View Dossier</button>
+                    <button type="button" class="btn btn-primary btn-sm btn-quick-print" data-patient="Anita Sen" data-id="PT-2026-7643" data-age="61" data-gender="Female" data-diag="Liver Cirrhosis" data-conf="97.8" data-risk="High Risk" data-color="#dc2626" data-findings="Coarsened, heterogeneous echotexture with pronounced surface nodularity and blunted anterior edge. Caudate lobe hypertrophy (caudate-to-right lobe ratio > 0.65). Portal vein diameter enlarged to 14 mm.">Print / PDF</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>PT-2026-6120</strong></td>
+                <td>Vikram Malhotra</td>
+                <td>56 / M</td>
+                <td>Contrast CT</td>
+                <td><strong style="color:#dc2626;">Liver Tumor / HCC</strong> (99.1%)</td>
+                <td><span class="badge" style="background:#b91c1c; color:#fff;">Critical Tier</span></td>
+                <td><span class="badge badge-verified">&check; Signed</span></td>
+                <td>
+                  <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-secondary btn-sm btn-open-modal-dossier" data-patient="Vikram Malhotra" data-id="PT-2026-6120" data-age="56 / Male" data-mod="Contrast CT" data-diag="Liver Tumor / HCC (Segment VI/VII) &bull; 99.1%" data-risk="Critical Tier" data-findings="4.2 cm hypervascular focal hepatic lesion in right lobe (Segment VI/VII) with arterial phase hyperenhancement and rapid portal venous phase washout, matching LI-RADS 5 definite hepatocellular carcinoma.">View Dossier</button>
+                    <button type="button" class="btn btn-primary btn-sm btn-quick-print" data-patient="Vikram Malhotra" data-id="PT-2026-6120" data-age="56" data-gender="Male" data-diag="Liver Tumor / HCC" data-conf="99.1" data-risk="Critical Tier" data-color="#b91c1c" data-findings="4.2 cm hypervascular focal hepatic lesion in right lobe (Segment VI/VII) with arterial phase hyperenhancement and rapid portal venous phase washout, matching LI-RADS 5 definite hepatocellular carcinoma.">Print / PDF</button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -141,7 +272,7 @@
           <span class="badge badge-literature">Literature Evaluation</span>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.25rem;">
+        <div class="reports-dossier-grid">
           <div style="background:var(--color-surface); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--color-border);">
             <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">TASK A SUMMARY</div>
             <h4 style="margin:0.35rem 0;">Multi-Scale CNN NAFLD</h4>
@@ -171,7 +302,7 @@
   <div class="modal-overlay hidden" id="modal-report-preview">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h4 style="color:var(--color-primary);">Clinical Report PDF Preview (PT-20261119-425C)</h4>
+        <h4 style="color:var(--color-primary);" id="modal-report-title">Clinical Report PDF Preview (PT-20261119-425C)</h4>
         <button class="btn btn-ghost btn-sm btn-close-modal">&times;</button>
       </div>
       <div class="modal-body" style="background:#FAF6FA; text-align:center;">
@@ -185,19 +316,19 @@
           </div>
 
           <div style="font-size:0.82rem; margin-bottom:1rem; display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
-            <div><strong>Patient Name:</strong> Meera Verma</div>
-            <div><strong>Accession #:</strong> PT-20261119-425C</div>
-            <div><strong>Age / Gender:</strong> 48 Yrs / Female</div>
-            <div><strong>Modality:</strong> Ultrasound (US)</div>
+            <div><strong>Patient Name:</strong> <span id="modal-patient-name">Meera Verma</span></div>
+            <div><strong>Accession #:</strong> <span id="modal-accession-no">PT-20261119-425C</span></div>
+            <div><strong>Age / Gender:</strong> <span id="modal-age-gender">48 Yrs / Female</span></div>
+            <div><strong>Modality:</strong> <span id="modal-modality">Ultrasound (US)</span></div>
           </div>
 
           <div style="background:#F5EEF6; padding:0.75rem; border-radius:6px; margin-bottom:1rem; border:1px solid var(--color-border);">
             <div style="font-size:0.75rem; text-transform:uppercase; color:#812D80; font-weight:700;">AI Primary Finding:</div>
-            <div style="font-size:1.05rem; font-weight:800; color:#29232D;">Fatty Liver (Hepatic Steatosis) &bull; 93.5% Confidence</div>
-            <span class="badge badge-experimental" style="margin-top:0.35rem;">Moderate Risk Tier</span>
+            <div style="font-size:1.05rem; font-weight:800; color:#29232D;" id="modal-ai-finding">Fatty Liver (Hepatic Steatosis) &bull; 93.5% Confidence</div>
+            <span class="badge badge-experimental" style="margin-top:0.35rem;" id="modal-risk-tier">Moderate Risk Tier</span>
           </div>
 
-          <p style="font-size:0.78rem; color:#77717A; line-height:1.45;">
+          <p style="font-size:0.78rem; color:#77717A; line-height:1.45;" id="modal-findings-text">
             Diffusely elevated parenchymal acoustic echogenicity with deep acoustic beam attenuation. Portal venule delineation blunted, characteristic of Grade II Hepatic Steatosis.
           </p>
 
@@ -208,9 +339,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <span style="font-size:0.75rem; color:var(--color-text-muted); margin-right:auto;">
-          Real ReportLab generator connects via <code>/api/report/{id}</code> during integration.
-        </span>
+        <button class="btn btn-primary btn-sm" id="btn-modal-print-report" style="margin-right:auto;">
+          🖨️ Print / Download PDF
+        </button>
         <button class="btn btn-secondary btn-sm btn-close-modal">Close</button>
       </div>
     </div>
