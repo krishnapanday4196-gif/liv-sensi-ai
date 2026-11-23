@@ -25,3 +25,5 @@ uploads/*.jpg
 # Vercel & Node
 .vercel/
 node_modules/
+
+server/
