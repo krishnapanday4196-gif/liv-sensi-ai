@@ -1,0 +1,7 @@
+server/
+server/**
+*.py
+*.db
+reports/
+uploads/
+cloudflared.exe
