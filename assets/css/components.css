@@ -1435,24 +1435,32 @@
   }
 
   /* Universal Responsive Table Container */
+  .card, 
   .data-table-wrapper, 
   .table-responsive,
   div[style*="overflow-x: auto"] {
     width: 100% !important;
     max-width: 100% !important;
-    overflow-x: auto !important;
-    display: block !important;
-    -webkit-overflow-scrolling: touch !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
   }
 
+  .data-table-wrapper, 
+  .table-responsive,
+  div[style*="overflow-x: auto"] {
+    overflow-x: auto !important;
+    display: block !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
   .data-table {
-    min-width: 580px !important;
+    width: 100% !important;
+    min-width: 420px !important;
   }
 
   .data-table th, .data-table td {
-    padding: 0.65rem 0.75rem !important;
-    font-size: 0.78rem !important;
+    padding: 0.55rem 0.55rem !important;
+    font-size: 0.76rem !important;
     white-space: nowrap !important;
   }
 }
