@@ -154,7 +154,6 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Scan Intake &amp; Metadata</h3>
-            <span class="badge badge-verified">Live PyTorch Connected</span>
           </div>
 
           <!-- Dropzone -->
@@ -213,11 +212,11 @@
           <div class="card-header">
             <div>
               <div style="font-size:0.75rem; text-transform:uppercase; color:var(--color-text-muted); font-weight:700;">Live AI Prediction:</div>
-              <h3 class="card-title" id="outcome-class-title" style="color:var(--color-primary); font-size:1.35rem;">Normal Liver (Control Baseline)</h3>
+              <h3 class="card-title" id="outcome-class-title" style="color:var(--color-primary); font-size:1.35rem;">Awaiting Diagnostic Analysis</h3>
             </div>
             <div style="display:flex; align-items:center; gap:0.5rem;">
-              <span class="badge badge-verified" id="outcome-risk-badge" style="background:#10b981; color:#fff;">LOW RISK</span>
-              <span class="badge badge-baseline" id="outcome-conf-val">98.1% Confidence</span>
+              <span class="badge" id="outcome-risk-badge" style="background:#64748b; color:#fff;">STANDBY</span>
+              <span class="badge badge-baseline" id="outcome-conf-val">Pending</span>
             </div>
           </div>
 
@@ -238,7 +237,7 @@
 
             <div class="viewer-canvas" id="viewer-box">
               <img id="preview-scan-img" class="viewer-scan-img" src="/sample_scans/sample_normal_liver.png" alt="Scan">
-              <img id="preview-heat-img" class="viewer-heat-img" src="/sample_scans/sample_normal_cam.png" alt="Heatmap">
+              <img id="preview-heat-img" class="viewer-heat-img" src="/sample_scans/sample_normal_cam.png" alt="Heatmap" style="opacity: 0;">
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.65rem; font-size:0.7rem; color:var(--color-text-muted);">
@@ -252,15 +251,14 @@
           <div style="margin-top: 1.25rem; font-size:0.85rem; color:var(--color-text-muted);">
             <div style="font-weight:700; color:var(--color-text); margin-bottom:0.25rem;">Real Neural Network &amp; Radiological Findings:</div>
             <p id="outcome-findings-text" style="font-size:0.8rem; line-height:1.45; margin-bottom:0.75rem;">
-              Liver parenchyma demonstrates uniform density/echogenicity with smooth anatomic margins. Vascular architecture clearly visualized.
+              Scan loaded. Click &quot;Run Real Deep Learning Diagnostic &amp; Grad-CAM&quot; to execute neural network inference.
             </p>
             <div style="font-weight:700; color:var(--color-text); margin-bottom:0.25rem;">Recommended Clinical Next Steps:</div>
             <div id="outcome-recommendations-list" style="font-size:0.78rem; line-height:1.45; margin-bottom:1.25rem;">
-              • Routine annual preventive health check-up.<br>
-              • Maintain balanced Mediterranean diet and regular physical activity.
+              • Awaiting diagnostic analysis.
             </div>
 
-            <a id="btn-download-pdf-report" href="#" target="_blank" class="btn btn-primary btn-sm" style="width:100%; justify-content:center; gap:0.5rem;">
+            <a id="btn-download-pdf-report" href="#" target="_blank" class="btn btn-primary btn-sm hidden" style="width:100%; justify-content:center; gap:0.5rem;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Download Real Official Clinical PDF Report
             </a>

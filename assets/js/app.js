@@ -120,6 +120,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function resetOutcomeStandby(message) {
+    const outcomeTitle = document.getElementById('outcome-class-title');
+    const outcomeRisk = document.getElementById('outcome-risk-badge');
+    const outcomeConf = document.getElementById('outcome-conf-val');
+    const findingsP = document.getElementById('outcome-findings-text');
+    const recsList = document.getElementById('outcome-recommendations-list');
+
+    if (outcomeTitle) outcomeTitle.textContent = 'Awaiting Diagnostic Analysis';
+    if (outcomeRisk) {
+      outcomeRisk.textContent = 'STANDBY';
+      outcomeRisk.style.backgroundColor = '#64748b';
+      outcomeRisk.style.color = '#fff';
+    }
+    if (outcomeConf) outcomeConf.textContent = 'Pending';
+    if (findingsP) findingsP.textContent = message || 'Scan loaded. Click "Run Real Deep Learning Diagnostic & Grad-CAM" to initiate neural network classification.';
+    if (recsList) {
+      recsList.innerHTML = '<div style="margin-bottom:0.35rem;">• Awaiting diagnostic analysis execution.</div>';
+    }
+    if (heatImg) heatImg.style.opacity = '0'; // Keep heatmap completely hidden
+    if (btnDownloadPdf) btnDownloadPdf.classList.add('hidden');
+  }
+
   function handleLocalUpload(file) {
     uploadedFile = file;
     selectedPresetFile = null;
@@ -129,11 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.onload = (e) => {
       uploadedDataUrl = e.target.result;
       if (scanImg) scanImg.src = uploadedDataUrl;
-      if (heatImg) heatImg.src = uploadedDataUrl; // placeholder until inference runs
+      if (heatImg) {
+        heatImg.src = uploadedDataUrl;
+        heatImg.style.opacity = '0';
+      }
       if (previewFileName) previewFileName.textContent = `Uploaded: ${file.name} (Ready for Analysis)`;
       
-      // Auto run diagnostic on upload
-      runRealInference();
+      // Do NOT auto-run! Wait for user to click "Run Real Deep Learning Diagnostic"
+      resetOutcomeStandby(`Uploaded scan "${file.name}" ready. Click "Run Real Deep Learning Diagnostic & Grad-CAM" to analyze.`);
     };
     reader.readAsDataURL(file);
   }
@@ -149,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
       selectedPresetFile = presetFile;
       uploadedFile = null;
       uploadedDataUrl = null;
-      if (previewFileName) previewFileName.textContent = `Preset: ${btn.textContent.trim()}`;
+      if (previewFileName) previewFileName.textContent = `Preset: ${btn.textContent.trim()} (Ready for Analysis)`;
 
       const pData = PRESETS[presetFile];
       if (pData) {
@@ -158,9 +183,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (patientGenderInput) patientGenderInput.value = pData.gender;
         if (patientSymptomsInput) patientSymptomsInput.value = pData.symptoms;
         if (patientEnzymesInput) patientEnzymesInput.value = pData.alt_ast;
+        if (scanImg && pData.scan_url) scanImg.src = pData.scan_url;
+        if (heatImg && pData.heatmap_url) {
+          heatImg.src = pData.heatmap_url;
+          heatImg.style.opacity = '0'; // Keep heatmap hidden until user clicks "Run Real"
+        }
       }
 
-      runRealInference();
+      // Do NOT auto-run! Reset to standby awaiting click
+      resetOutcomeStandby(`Preset scenario loaded: ${btn.textContent.trim()}. Click "Run Real Deep Learning Diagnostic & Grad-CAM" to initiate inference.`);
     });
   });
 
@@ -620,8 +651,8 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
-  // Initial run on page load
+  // Initial state on page load - STANDBY until user clicks "Run Real"
   if (document.getElementById('btn-run-analysis')) {
-    runRealInference();
+    resetOutcomeStandby('Preset Normal Liver loaded. Click "Run Real Deep Learning Diagnostic & Grad-CAM" to initiate inference.');
   }
 });
