@@ -2,28 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-
-  <!-- PWA & Mobile App Meta Tags -->
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#812D80">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Liv-Sensi">
+  <meta name="theme-color" content="#812D80">
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/assets/images/apple_touch_icon.png">
   <link rel="icon" type="image/png" href="/assets/images/livsensi_icon_192.png">
   <title>AI Imaging Workspace – Liv-Sensi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Preload Critical Scan for 0ms Instant Load -->
   <link rel="preload" href="/sample_scans/sample_normal_liver.png" as="image">
+  <link rel="preload" href="/sample_scans/sample_normal_cam.png" as="image">
   
   <link rel="stylesheet" href="/assets/css/design-system.css">
   <link rel="stylesheet" href="/assets/css/animations.css">
   <link rel="stylesheet" href="/assets/css/components.css">
 
   <style>
-    /* Ultra-Fast Instant Mobile Layout & Zero-Horizontal-Scroll Architecture */
+    /* Instant Native Mobile Font Engine (0ms network latency) */
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+      overflow-x: hidden !important;
+      width: 100% !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* Ultra-Fast Responsive Layout Grid */
     .analysis-workspace-grid {
       display: grid;
       grid-template-columns: 1fr 1.25fr;
@@ -52,11 +61,20 @@
     /* Mobile & Tablet Auto-Stacking (< 992px) */
     @media (max-width: 992px) {
       .analysis-workspace-grid {
-        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
         gap: 1.25rem !important;
+        width: 100% !important;
       }
+
+      /* Place the Radiology Viewer FIRST on Mobile so it is instantly visible! */
+      #preview-outcome-box {
+        order: -1 !important;
+        width: 100% !important;
+      }
+
       .hv-main-content {
-        padding: 0.85rem 0.65rem 4.5rem !important;
+        padding: 0.75rem 0.65rem 5rem !important;
         max-width: 100vw !important;
         overflow-x: hidden !important;
       }
@@ -64,12 +82,21 @@
 
     /* Smart Mobile Phone Sizing (< 600px) */
     @media (max-width: 600px) {
+      .hv-navbar-container {
+        padding: 0.5rem 0.75rem !important;
+      }
+
+      .hv-brand-name {
+        font-size: 1.05rem !important;
+      }
+
       .preset-buttons-container {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
         gap: 0.45rem !important;
         width: 100% !important;
       }
+
       .preset-buttons-container .btn {
         width: 100% !important;
         font-size: 0.75rem !important;
@@ -78,48 +105,76 @@
         justify-content: center !important;
         white-space: nowrap !important;
       }
+
       .patient-intake-grid {
         grid-template-columns: 1fr !important;
         gap: 0.65rem !important;
       }
+
       .patient-intake-grid > div {
         grid-column: span 1 !important;
       }
+
       .viewer-toolbar {
         flex-direction: column !important;
         align-items: stretch !important;
         gap: 0.5rem !important;
       }
+
       .viewer-slider-group {
         width: 100% !important;
         justify-content: space-between !important;
       }
+
       .viewer-slider-group input[type="range"] {
         flex: 1 !important;
         width: auto !important;
       }
+
       .card {
-        padding: 1rem 0.85rem !important;
+        padding: 0.85rem !important;
+        border-radius: var(--radius-md) !important;
+        margin-bottom: 1rem !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+      }
+
+      .viewer-container {
+        padding: 0.5rem !important;
         border-radius: var(--radius-md) !important;
       }
+
       .viewer-canvas {
         width: 100% !important;
         height: auto !important;
-        max-height: 320px !important;
+        max-height: 290px !important;
         aspect-ratio: 1 / 1 !important;
       }
+
       .viewer-canvas img {
         max-width: 100% !important;
-        height: auto !important;
+        max-height: 100% !important;
         object-fit: contain !important;
       }
+
       .card-header {
         flex-wrap: wrap !important;
         gap: 0.5rem !important;
+        padding-bottom: 0.65rem !important;
+        margin-bottom: 0.65rem !important;
       }
+
+      #outcome-class-title {
+        font-size: 1.15rem !important;
+      }
+
       #btn-run-analysis {
         padding: 0.85rem !important;
         font-size: 0.88rem !important;
+      }
+
+      .dropzone-box {
+        padding: 1rem 0.75rem !important;
+        margin-bottom: 1rem !important;
       }
     }
   </style>
@@ -301,13 +356,6 @@
               <input type="text" id="patient-enzymes-input" value="ALT: 22 U/L, AST: 20 U/L (Normal Reference)" style="width:100%; padding:0.55rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); margin-top:0.25rem;">
             </div>
           </div>
-
-          <!-- Run Analysis Button -->
-          <button type="button" class="btn btn-primary" id="btn-run-analysis" style="width:100%; padding:0.85rem; font-size:0.95rem;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-            <span id="analyze-btn-text">Run Real Deep Learning Diagnostic &amp; Grad-CAM</span>
-            <div class="spinner hidden" id="analyze-spinner" style="width:16px; height:16px; border:2px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite;"></div>
-          </button>
         </div>
 
         <!-- Right: Dual-Layer Radiology Viewer & Real Explainability -->
@@ -348,6 +396,15 @@
               <div style="flex:1; height:6px; margin:0 1rem; border-radius:4px; background:linear-gradient(90deg, #812D80, #E52591, #FFDE59);"></div>
               <span>High Activation (Pathology Focus)</span>
             </div>
+          </div>
+
+          <!-- Run Analysis Button inside Outcome Console for Instant Mobile Access -->
+          <div style="margin-top: 1.25rem;">
+            <button type="button" class="btn btn-primary" id="btn-run-analysis" style="width:100%; padding:0.95rem; font-size:1rem; font-weight:700; box-shadow: 0 4px 14px rgba(129,45,128,0.35);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+              <span id="analyze-btn-text">Run Real Deep Learning Diagnostic &amp; Grad-CAM</span>
+              <div class="spinner hidden" id="analyze-spinner" style="width:18px; height:18px; border:2px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite;"></div>
+            </button>
           </div>
 
           <!-- Findings & Scientific Advice -->
