@@ -114,26 +114,29 @@
         </div>
         <div style="display:flex; gap:0.5rem;">
           <button type="button" class="btn btn-secondary btn-sm preview-preset-btn active"
-            data-scan="../sample_scans/sample_normal_liver.png"
-            data-heat="../sample_scans/sample_normal_liver.png"
+            data-preset-file="sample_normal_liver.png"
+            data-scan="/sample_scans/sample_normal_liver.png"
+            data-heat="/sample_scans/sample_normal_cam.png"
             data-title="Normal Parenchyma Baseline"
-            data-conf="98.1%"
+            data-conf="98.4%"
             data-risk="LOW RISK">
             Normal Scan
           </button>
           <button type="button" class="btn btn-secondary btn-sm preview-preset-btn"
-            data-scan="../sample_scans/sample_fatty_liver.png"
-            data-heat="../sample_scans/sample_fatty_liver.png"
+            data-preset-file="sample_fatty_liver.png"
+            data-scan="/sample_scans/sample_fatty_liver.png"
+            data-heat="/sample_scans/sample_fatty_cam.png"
             data-title="Hepatic Steatosis (Fatty Liver)"
-            data-conf="95.4%"
+            data-conf="96.2%"
             data-risk="MODERATE RISK">
             Fatty Liver
           </button>
           <button type="button" class="btn btn-secondary btn-sm preview-preset-btn"
-            data-scan="../sample_scans/sample_liver_tumor.png"
-            data-heat="../sample_scans/sample_liver_tumor.png"
+            data-preset-file="sample_liver_tumor.png"
+            data-scan="/sample_scans/sample_liver_tumor.png"
+            data-heat="/sample_scans/sample_tumor_cam.png"
             data-title="Focal Hepatic Lesion / Tumor"
-            data-conf="97.2%"
+            data-conf="99.1%"
             data-risk="CRITICAL RISK">
             Liver Tumor
           </button>
@@ -158,8 +161,8 @@
             </div>
 
             <div class="viewer-canvas" id="viewer-box">
-              <img id="preview-scan-img" class="viewer-scan-img" src="../sample_scans/sample_normal_liver.png" alt="Scan">
-              <img id="preview-heat-img" class="viewer-heat-img" src="../sample_scans/sample_normal_liver.png" alt="Heatmap">
+              <img id="preview-scan-img" class="viewer-scan-img" src="/sample_scans/sample_normal_liver.png" alt="Scan">
+              <img id="preview-heat-img" class="viewer-heat-img" src="/sample_scans/sample_normal_cam.png" alt="Heatmap">
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.65rem; font-size:0.7rem; color:var(--color-text-muted);">
